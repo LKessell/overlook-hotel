@@ -2,7 +2,8 @@ const roomsTestData = [
   {
     'number': 1,
     'roomType': 'residential suite',
-    'bidet': true,'bedSize':'queen',
+    'bidet': true,
+    'bedSize': 'queen',
     'numBeds': 1,
     'costPerNight': 358.4
   },
@@ -32,35 +33,11 @@ const roomsTestData = [
   },
   {
     'number': 5,
-    'roomType': 'single room',
+    'roomType': 'junior suite',
     'bidet': true,
     'bedSize': 'queen',
     'numBeds': 2,
     'costPerNight': 340.17
-  },
-  {
-    'number': 6,
-    'roomType': 'junior suite',
-    'bidet': true,
-    'bedSize': 'queen',
-    'numBeds': 1,
-    'costPerNight': 397.02
-  },
-  {
-    'number': 7,
-    'roomType': 'single room',
-    'bidet': false,
-    'bedSize': 'queen',
-    'numBeds': 2,
-    'costPerNight': 231.46
-  },
-  {
-    'number': 8,
-    'roomType': 'junior suite',
-    'bidet': false,
-    'bedSize': 'king',
-    'numBeds': 1,
-    'costPerNight': 261.26
   }
 ];
 
