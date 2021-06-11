@@ -15,10 +15,22 @@ describe('Customer Class', () => {
   let customer;
 
   beforeEach(() => {
-    customer = new Customer(customersTestData);
+    customer = new Customer(customersTestData[0]);
   });
 
   it('Should be a function', () => {
     expect(Customer).to.be.a('function');
+  });
+
+  it('Should be an instance of Customer', () => {
+    expect(customer).to.be.an.instanceof(Customer);
+  });
+
+  it('Should have an ID number', () => {
+    expect(customer.id).to.equal(1);
+  });
+
+  it('Should have a name', () => {
+    expect(customer.name).to.equal('Leatha Ullrich');
   });
 });
