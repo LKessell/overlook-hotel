@@ -18,4 +18,12 @@ describe('Booking Class', () => {
   it('Should be an instance of the Booking class', () => {
     expect(booking).to.be.an.instanceof(Booking);
   });
+
+  it('Should have an id', () => {
+    expect(booking.id).to.equal('5fwrgu4i7k55hl6sz');
+  });
+
+  it('Should have a user id', () => {
+    expect(booking.userID).to.equal(2);
+  });
 });
