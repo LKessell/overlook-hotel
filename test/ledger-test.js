@@ -5,12 +5,13 @@ import bookingsTestData from './test-data/bookings-data';
 import roomsTestData from './test-data/rooms-data';
 import Booking from '../src/Booking';
 import Room from '../src/Room';
+import Ledger from '../src/Ledger';
 
 describe('Ledger Class', () => {
   let ledger;
 
   beforeEach(() => {
-    ledger = new Ledger(roomData, bookingData);
+    ledger = new Ledger(roomsTestData, bookingsTestData);
   });
 
   it('Should hold an array of all Room instances', () => {
