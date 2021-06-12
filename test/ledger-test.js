@@ -156,4 +156,22 @@ describe('Ledger Class', () => {
       }
     ]);
   });
+
+  it('Should filter rooms by room type', () => {
+    expect(ledger.filterByType(roomsTestData, 'suite')).to.deep.equal([
+      {
+        'number': 2,
+        'roomType': 'suite',
+        'bidet': false ,
+        'bedSize': 'full',
+        'numBeds': 2,
+        'costPerNight': 477.38
+      }
+    ]);
+  });
+
+  it('Should return false if no matches are found', () => {
+    const availableRooms = ledger.getAvailableRooms('2020-01-11');
+    expect(ledger.filterByType(availableRooms, 'junior suite')).to.equal(false);
+  });
 });
