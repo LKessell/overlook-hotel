@@ -3,7 +3,7 @@ const expect = chai.expect;
 
 import customersTestData from './test-data/customers-data';
 import bookingsTestData from './test-data/bookings-data';
-import roomsTestData from './text-data/rooms-data';
+import roomsTestData from './test-data/rooms-data';
 
 import Booking from '../src/Booking';
 import Room from '../src/Room';
@@ -14,8 +14,8 @@ describe('Customer Class', () => {
   let customer, ledger;
 
   beforeEach(() => {
-    customer = new Customer(customersTestData[0]);
     ledger = new Ledger(roomsTestData, bookingsTestData);
+    customer = new Customer(customersTestData[0], ledger.bookings);
   });
 
   it('Should be a function', () => {
