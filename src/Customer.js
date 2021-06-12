@@ -17,9 +17,9 @@ class Customer {
   }
 
   getPastBookings(inputDate) {
-    return this.bookings.filter(booking => {
-      const bookDate = new Date(booking.date).setHours(0,0,0,0);
-      const givenDate = new Date(inputDate).setHours(0,0,0,0);
+    const results = this.bookings.filter(booking => {
+      const bookDate = new Date(booking.date);
+      const givenDate = new Date(inputDate);
 
       if (bookDate <= givenDate) {
         return true;
@@ -27,12 +27,18 @@ class Customer {
         return false;
       }
     });
+
+    if (results.length) {
+      return results;
+    } else {
+      return false;
+    }
   }
 
   getFutureBookings(inputDate) {
-    return this.bookings.filter(booking => {
-      const bookDate = new Date(booking.date).setHours(0,0,0,0);
-      const givenDate = new Date(inputDate).setHours(0,0,0,0);
+    const results = this.bookings.filter(booking => {
+      const bookDate = new Date(booking.date);
+      const givenDate = new Date(inputDate);
 
       if (bookDate >= givenDate) {
         return true;
@@ -40,6 +46,12 @@ class Customer {
         return false;
       }
     });
+
+    if (results.length) {
+      return results;
+    } else {
+      return false;
+    }
   }
 }
 
