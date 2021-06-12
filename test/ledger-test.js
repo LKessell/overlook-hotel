@@ -157,6 +157,33 @@ describe('Ledger Class', () => {
     ]);
   });
 
+  it('Should return false if no rooms are available that day', () => {
+    const new1 = new Booking({
+      'id': '5fwrgu4i7k55hl6f67',
+      'userID': 1,
+      'date': '2020/01/11',
+      'roomNumber': 1,
+      'roomServiceCharges': []
+    });
+    const new2 = new Booking({
+      'id': '5fwrgu4i7k55hl6tzy4',
+      'userID': 1,
+      'date': '2020/01/11',
+      'roomNumber': 2,
+      'roomServiceCharges': []
+    });
+    const new3 = new Booking({
+      'id': '5fwrgu4i7k55hl6fff8',
+      'userID': 1,
+      'date': '2020/01/11',
+      'roomNumber': 3,
+      'roomServiceCharges': []
+    });
+    this.bookings.push(new1, new2, new3);
+
+    expect(ledger.getAvailableRooms('2020-01-11')).to.equal(false);
+  });
+
   it('Should filter rooms by room type', () => {
     expect(ledger.filterByType(roomsTestData, 'suite')).to.deep.equal([
       {
