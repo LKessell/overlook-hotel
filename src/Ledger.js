@@ -23,6 +23,23 @@ class Ledger {
       this.bookings.push(newBooking);
     });
   }
+
+  getAvailableRooms(date) {
+    const modDate = date.split('-').join('/');
+    const bookedRoomNums = this.bookings.reduce((booked, booking) => {
+      if (booking.date === modDate) {
+        booked.push(booking.roomNumber);
+      }
+      return booked;
+    }, []);
+    const matchedRooms = this.rooms.filter(room => !bookedRoomNums.includes(room.number));
+
+    if (matchedRooms.length) {
+      return matchedRooms;
+    } else {
+      return false;
+    }
+  }
 }
 
 export default Ledger;
