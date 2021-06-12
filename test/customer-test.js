@@ -125,4 +125,14 @@ describe('Customer Class', () => {
     expect(customer.getPastBookings('2020-01-04')).to.equal(false);
     expect(customer.getFutureBookings('2020-01-17')).to.equal(false);
   });
+
+  it('Should calculate the total amount spent on bookings', () => {
+    expect(customer.getTotalSpent()).to.equal(1260.75);
+  });
+
+  it('Should return 0 if customer has no bookings', () => {
+    const newCustomer = new Customer({ 'id': 6, 'name': 'Bennett Schroeder' });
+
+    expect(newCustomer.getTotalSpent()).to.equal(0);
+  });
 });
