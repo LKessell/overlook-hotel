@@ -11,5 +11,11 @@ describe.only('Room Class', () => {
     room = new Room(roomsTestData[0]);
   });
 
+  it('Should be a function', () => {
+    expect(Room).to.be.a('function');
+  });
 
+  it('Should be an instance of the Room class', () => {
+    expect(room).to.be.an.instanceof(Room);
+  });
 });
