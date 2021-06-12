@@ -18,4 +18,16 @@ describe.only('Room Class', () => {
   it('Should be an instance of the Room class', () => {
     expect(room).to.be.an.instanceof(Room);
   });
+
+  it('Should have a number', () => {
+    expect(room.number).to.equal(1);
+  });
+
+  it('Should have a roomType', () => {
+    expect(room.roomType).to.equal('residential suite');
+  });
+
+  it('Should have a bidet property', () => {
+    expect(room.bidet).to.equal(true);
+  });
 });
