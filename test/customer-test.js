@@ -1,21 +1,21 @@
 import chai from 'chai';
 const expect = chai.expect;
 
-import customersTestData from './test-data/customers-data.js';
+import customersTestData from './test-data/customers-data';
 import bookingsTestData from './test-data/bookings-data';
+import roomsTestData from './text-data/rooms-data';
+
+import Booking from '../src/Booking';
+import Room from '../src/Room';
+import Ledger from '../src/Ledger';
 import Customer from '../src/Customer';
 
-// describe('See if the tests are running', function() {
-//   it('should return true', function() {
-//     expect(true).to.equal(true);
-//   });
-// });
-
 describe('Customer Class', () => {
-  let customer;
+  let customer, ledger;
 
   beforeEach(() => {
     customer = new Customer(customersTestData[0]);
+    ledger = new Ledger(roomsTestData, bookingsTestData);
   });
 
   it('Should be a function', () => {
