@@ -15,6 +15,19 @@ class Customer {
   sortBookings() {
     return this.bookings.sort((a, b) => new Date(a.date) - new Date(b.date));
   }
+
+  getPastBookings(inputDate) {
+    return this.bookings.filter(booking => {
+      const bookDate = new Date(booking.date).setHours(0,0,0,0);
+      const givenDate = new Date(inputDate).setHours(0,0,0,0);
+
+      if (bookDate <= givenDate) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
 }
 
 export default Customer;
