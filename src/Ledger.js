@@ -40,6 +40,16 @@ class Ledger {
       return false;
     }
   }
+
+  filterByType(roomData, type) {
+    const matchedRooms = roomData.filter(room => room.roomType === type);
+
+    if (matchedRooms.length) {
+      return matchedRooms;
+    } else {
+      return false;
+    }
+  }
 }
 
 export default Ledger;
