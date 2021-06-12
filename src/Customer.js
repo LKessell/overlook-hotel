@@ -53,6 +53,17 @@ class Customer {
       return false;
     }
   }
+
+  getTotalSpent(roomData) {
+    const roomNums = this.bookings.map(booking => booking.roomNumber);
+  
+    return roomData.reduce((sum, room) => {
+      if (roomNums.includes(room.number)) {
+        sum += room.costPerNight;
+      }
+      return sum;
+    }, 0);
+  }
 }
 
 export default Customer;
