@@ -26,4 +26,16 @@ describe('Booking Class', () => {
   it('Should have a user id', () => {
     expect(booking.userID).to.equal(2);
   });
+
+  it('Should have a date', () => {
+    expect(booking.date).to.equal('2020/01/22');
+  });
+
+  it('Should have a room number', () => {
+    expect(booking.roomNumber).to.equal(1);
+  });
+
+  it('Should start with no room service charges', () => {
+    expect(booking.roomServiceCharges).to.deep.equal([]);
+  });
 });
