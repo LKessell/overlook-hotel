@@ -180,7 +180,7 @@ describe('Ledger Class', () => {
       'roomNumber': 3,
       'roomServiceCharges': []
     });
-    this.bookings.push(new1, new2, new3);
+    ledger.bookings.push(new1, new2, new3);
 
     expect(ledger.getAvailableRooms('2020-01-11')).to.equal(false);
   });
