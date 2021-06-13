@@ -141,6 +141,8 @@ input {
 }
 
 .availability-container {
+  display: flex;
+  flex-direction: column;
   margin-top: 6vw;
 
   article {
@@ -221,12 +223,44 @@ h3 {
   display: none;
 }
 
-@media screen and (min-width: 650px) {
+@media screen and (min-width: 600px) {
 
-  .availability-container-container {
+  .availability-container {
     flex-direction: row;
     flex-wrap: wrap;
     padding: 0 1em 1em 1em;
+
+    article {
+      height: 50vw;
+      width: 40vw;
+      margin: 1vw;
+    }
+  }
+
+  .image-wrapper {
+    height: 20vw;
+  }
+
+  .image-overlay {
+    height: 23vw;
+    padding: 2.5vw;
+  }
+
+  .more-info {
+    font-size: 8vw;
+  }
+
+  .name-text {
+    font-size: 2.5vw;
+    margin: 1vw;
+  }
+
+  .info-text {
+    font-size: 1.75vw;
+  }
+
+  .article-text {
+    padding: 1vw;
   }
 
   h2 {
