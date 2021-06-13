@@ -1,16 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <title>The Overlook</title>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/10ffbe374d.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
-  
+  <header>
+      <section class="user-wrapper">
+        <i class="fas fa-user"></i>
+        <p class="username">Cool Username</p>
+        <i class="fas fa-caret-down"></i>
+      </section>
+      <div class="nav-title-wrapper">
+        <h1>The Overlook</h1>
+        <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+        <nav>
+          <button class="active"><i class="fas fa-calendar-day"></i> My Bookings</button>
+          <button><i class="far fa-calendar-plus"></i> Book a New Room</button>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <h2 id="containerHeading">My Bookings</h2>
+      <section class="customer-bookings">
+      <!-- <section class="article-container"> -->
+
+      </section>
+      <section class="new-booking"></section>
+    </main>
   <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   <script src="bundle.js"></script>
-
 </body>
 </html>
