@@ -13,14 +13,23 @@ import Customer from './Customer';
 import Ledger from './Ledger';
 import Room from './Room';
 
+// Variables
+let customer;
+let ledger;
+let rooms = [];
+let bookings = [];
+
 // Query Selectors
 
 // Event Listeners
+window.addEventListener('DOMContentLoaded', () => {
+  setUpRooms();
+});
 
 // Scripts
 const fetchData = (type) => {
   return fetch(`http://localhost:3001/api/v1/${type}`)
-    .then(checkForGetError)
+    .then(response => checkForGetError(response))
     .catch(err => console.error(err));
 }
 
@@ -31,3 +40,27 @@ const checkForGetError = (response) => {
     return response.json();
   }
 }
+
+ const setUpRooms = () => {
+   fetchData('rooms')
+    .then(data => data.rooms.forEach(element => rooms.push(element)))
+    .then(() => setUpBookings())
+ }
+
+ const setUpBookings = () => {
+   fetchData('bookings')
+    .then(data => data.bookings.forEach(element => bookings.push(element)))
+    .then(() => {
+      setUpLedger(rooms, bookings);
+      console.log(ledger)
+    })
+ }
+
+const setUpLedger = (roomData, bookingData) => {
+  ledger = new Ledger(roomData, bookingData);
+}
+
+// const loadUserInfo = () => {
+//   fetchData('customers/1')
+//   .then(customerData => customer = new Customer(customerData));
+// }
