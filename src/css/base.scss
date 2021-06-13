@@ -1,7 +1,318 @@
-/* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-;
+@import '_variables';
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-  background: $primary-background;
+  font-family: 'Open Sans', sans-serif;
+  min-height: 100vh;
+  background-color: $bg-color;
+}
+
+header {
+  background-color: $main-color;
+  color: $light-color;
+  padding: 2vw 6vw;
+  min-height: 27vw;
+}
+
+main {
+  color: #4c4c4c;
+}
+
+.user-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 4vw;
+}
+
+.nav-title-wrapper {
+  position: relative;
+}
+
+h1 {
+  text-align: right;
+  font-size: 8.5vw;
+}
+
+h2 {
+  font-size: 7vw;
+  margin: 1em 1em 0.5em 1em;
+}
+
+.menu-toggle {
+  position: absolute;
+  top: -4vw;
+  left: 1vw;
+}
+
+nav {
+  width: 100%;
+  text-align: left;
+}
+
+.fa-calendar-day,
+.fa-calendar-plus {
+  color: $accent-color;
+  margin: 0.1em;
+}
+
+button {
+  border: none;
+  background: none;
+  color: $light-color;
+  font-size: 8vw;
+  cursor: pointer;
+}
+
+nav button {
+  display: block;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 5vw;
+  color: #969696;
+  margin: 5vw 1vw;
+  transition: color 0.3s;
+}
+
+nav button:hover {
+  color: $accent-color;
+}
+
+.fa-user {
+  font-size: 3vw;
+  margin: 0.3em;
+}
+
+.fa-caret-down,
+.username {
+  font-size: 3vw;
+  color: $accent-color;
+  margin: 0.2em;
+  cursor: pointer;
+}
+
+.username:hover ~ .fa-caret-down {
+  transform: translateY(2px);
+}
+
+.customer-bookings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.booking-container {
+  margin: 1vw 1vw 3vw 1vw;
+}
+
+.single-booking {
+  background-color: #efefef;
+  width: 88vw;
+  height: 20vw;
+  margin: 2vw;
+  padding: 2vw;
+  display: flex;
+  font-size: 3.5vw;
+
+  h4, p {
+    display: inline;
+  }
+}
+
+.booking-img {
+  width: 20vw;
+  margin-right: 3vw;
+}
+
+.new-booking {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4vw;
+}
+
+input {
+  margin: 3vw 3vw 6vw 3vw;
+}
+
+.availability-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 6vw;
+
+  article {
+    height: 100vw;
+    width: 85vw;
+    background-color: #ffffff;
+    color: #5c5c5c;
+    box-shadow: 0px 0px 6px #9f9f9f;
+    margin-bottom: 2em;
+  }
+}
+
+img {
+  width: 100%;
+}
+
+.image-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 40vw;
+}
+
+.image-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  height: 46vw;
+  padding: 5vw;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(0,0,0,0.3);
+  transition: background-color 0.2s;
+}
+
+.image-overlay:hover {
+  background-color: rgba(0,0,0,0.0);
+}
+
+.more-info {
+  font-size: 12vw;
+  align-self: start;
+}
+
+.overlay-text {
+  text-transform: uppercase;
+  text-align: center;
+  color: #ffffff;
+}
+
+h3 {
+  font-size: 3.5vw;
+}
+
+.article-text {
+  padding: 3vw;
+}
+
+.name-text {
+  font-weight: 500;
+  font-size: 5vw;
+  margin: 3vw;
+}
+
+.info-text {
+  color: #a5a5a6;
+  font-size: 3.5vw;
+  margin-bottom: 2vw;
+}
+
+.active {
+  color: $light-color;
+  pointer-events: none;
+}
+
+.hidden {
+  display: none;
+}
+
+@media screen and (min-width: 600px) {
+
+  .availability-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0 1em 1em 1em;
+
+    article {
+      height: 50vw;
+      width: 40vw;
+      margin: 1vw;
+    }
+  }
+
+  .image-wrapper {
+    height: 20vw;
+  }
+
+  .image-overlay {
+    height: 23vw;
+    padding: 2.5vw;
+  }
+
+  .more-info {
+    font-size: 8vw;
+  }
+
+  .name-text {
+    font-size: 2.5vw;
+    margin: 1vw;
+  }
+
+  .info-text {
+    font-size: 1.75vw;
+  }
+
+  .article-text {
+    padding: 1vw;
+  }
+
+  h2 {
+    font-size: 4vw;
+  }
+
+  h1 {
+    font-size: 5.5vw;
+    display: inline;
+  }
+
+  .user-wrapper * {
+    font-size: 2vw;
+    margin-bottom: 4vw;
+  }
+
+  .nav-title-wrapper {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  header {
+    min-height: 22vw;
+    padding: 2vw 3vw 3vw 3vw;
+    max-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  nav {
+    display: inline;
+    width: auto;
+  }
+
+  nav button {
+    display: inline;
+    font-size: 2.5vw;
+    margin: 0.5vw;
+  }
+
+  .new-booking {
+    padding: 2vw;
+  }
+
+  input {
+    margin: 2vw;
+  }
 }
