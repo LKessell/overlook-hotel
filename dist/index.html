@@ -27,7 +27,7 @@
     </header>
     <main>
       <h2 id="containerHeading">My Bookings</h2>
-      <section class="customer-bookings">
+      <section class="customer-bookings hidden">
         <h3>Current Bookings</h3>
         <section class="booking-container" id="currentBookings">
           <!-- <p>You have no current bookings.</p> -->
@@ -46,7 +46,23 @@
           <p>You have no past bookings.</p>
         </section>
       </section>
-      <section class="new-booking"></section>
+      <section class="new-booking">
+        <label for="choose-date">Choose a date to view room availability:</label>
+        <input type="date" name="choose-date" id="datePicker">
+        <section class="type-filter">
+          <label for="typeFilter">Filter rooms by Type:</label>
+          <select id="typeFilter">
+            <option value="all">All Rooms</option>
+            <option value="suite">Suite</option>
+            <option value="residential suite">Residential Suite</option>
+            <option value="junior suite">Junior Suite</option>
+            <option value="single room">Single Room</option>
+          </select>
+        </section>
+        <section class="availability-container">
+          <p>We are very sorry, but no rooms match your current selections. Please try a different date or room type.</p>
+        </section>
+      </section>
     </main>
   <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   <script src="bundle.js"></script>
