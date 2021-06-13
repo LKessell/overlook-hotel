@@ -18,3 +18,16 @@ import Room from './Room';
 // Event Listeners
 
 // Scripts
+const fetchData = (type) => {
+  return fetch(`http://localhost:3001/api/v1/${type}`)
+    .then(checkForGetError)
+    .catch(err => console.error(err));
+}
+
+const checkForGetError = (response) => {
+  if (!response.ok) {
+    throw new Error('Could not retrieve data, please try again.');
+  } else {
+    return response.json();
+  }
+}
