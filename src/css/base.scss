@@ -110,6 +110,25 @@ nav button:hover {
   margin: 1vw 1vw 3vw 1vw;
 }
 
+.single-booking {
+  background-color: #efefef;
+  width: 88vw;
+  height: 20vw;
+  margin: 2vw;
+  padding: 2vw;
+  display: flex;
+  font-size: 3.5vw;
+
+  h4, p {
+    display: inline;
+  }
+}
+
+.booking-img {
+  width: 20vw;
+  margin-right: 3vw;
+}
+
 .active {
   color: $light-color;
   pointer-events: none;
