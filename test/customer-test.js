@@ -1,21 +1,21 @@
 import chai from 'chai';
 const expect = chai.expect;
 
-import customersTestData from './test-data/customers-data.js';
+import customersTestData from './test-data/customers-data';
 import bookingsTestData from './test-data/bookings-data';
+import roomsTestData from './test-data/rooms-data';
+
+import Booking from '../src/Booking';
+import Room from '../src/Room';
+import Ledger from '../src/Ledger';
 import Customer from '../src/Customer';
 
-// describe('See if the tests are running', function() {
-//   it('should return true', function() {
-//     expect(true).to.equal(true);
-//   });
-// });
-
 describe('Customer Class', () => {
-  let customer;
+  let customer, ledger;
 
   beforeEach(() => {
-    customer = new Customer(customersTestData[0]);
+    ledger = new Ledger(roomsTestData, bookingsTestData);
+    customer = new Customer(customersTestData[0], ledger.bookings);
   });
 
   it('Should be a function', () => {
@@ -60,9 +60,8 @@ describe('Customer Class', () => {
     ]);
   });
 
-  it('Should sort bookings by descending date', () => {
-    customer.sortBookings();
-    expect(customer.bookings).to.deep.equal([
+  it('Should sort bookings by ascending date', () => {
+    expect(customer.sortBookings()).to.deep.equal([
       {
         'id': '5fwrgu4i7k55hl6t8',
         'userID': 1,
@@ -109,17 +108,17 @@ describe('Customer Class', () => {
   it('Should return a list of current/future bookings', () => {
     expect(customer.getFutureBookings('2020-01-11')).to.deep.equal([
       {
-        'id': '5fwrgu4i7k55hl6tb',
-        'userID': 1,
-        'date': '2020/01/11',
-        'roomNumber': 4,
-        'roomServiceCharges': []
-      },
-      {
         'id': '5fwrgu4i7k55hl6t7',
         'userID': 1,
         'date': '2020/01/16',
         'roomNumber': 5,
+        'roomServiceCharges': []
+      },
+      {
+        'id': '5fwrgu4i7k55hl6tb',
+        'userID': 1,
+        'date': '2020/01/11',
+        'roomNumber': 4,
         'roomServiceCharges': []
       }
     ]);
@@ -131,12 +130,12 @@ describe('Customer Class', () => {
   });
 
   it('Should calculate the total amount spent on bookings', () => {
-    expect(customer.getTotalSpent()).to.equal(1260.75);
+    expect(customer.getTotalSpent(ledger.rooms)).to.equal(1260.75);
   });
 
   it('Should return 0 if customer has no bookings', () => {
-    const newCustomer = new Customer({ 'id': 6, 'name': 'Bennett Schroeder' });
+    const newCustomer = new Customer({ 'id': 6, 'name': 'Bennett Schroeder' }, ledger.bookings);
 
-    expect(newCustomer.getTotalSpent()).to.equal(0);
+    expect(newCustomer.getTotalSpent(ledger.rooms)).to.equal(0);
   });
 });
