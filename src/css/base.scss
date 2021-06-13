@@ -17,7 +17,7 @@ header {
   background-color: $main-color;
   color: $light-color;
   padding: 2vw 6vw;
-  min-height: 19vw;
+  min-height: 27vw;
 }
 
 main {
@@ -44,8 +44,13 @@ h2 {
   margin: 1em;
 }
 
+.menu-toggle {
+  position: absolute;
+  top: -4vw;
+  left: 1vw;
+}
+
 nav {
-  // display: none;
   width: 100%;
   text-align: left;
 }
@@ -78,7 +83,38 @@ nav button:hover {
   color: $accent-color;
 }
 
+.fa-user {
+  font-size: 3vw;
+  margin: 0.3em;
+}
+
+.fa-caret-down,
+.username {
+  font-size: 3vw;
+  color: $accent-color;
+  margin: 0.2em;
+  cursor: pointer;
+}
+
+.username:hover ~ .fa-caret-down {
+  transform: translateY(2px);
+}
+
+.customer-bookings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.booking-container {
+  margin: 1vw 1vw 3vw 1vw;
+}
+
 .active {
   color: $light-color;
   pointer-events: none;
+}
+
+.hidden {
+  display: none;
 }
