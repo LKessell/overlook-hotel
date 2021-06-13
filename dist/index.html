@@ -19,7 +19,7 @@
       <div class="nav-title-wrapper">
         <h1>The Overlook</h1>
         <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
-        <nav>
+        <nav class="hidden">
           <button class="active"><i class="fas fa-calendar-day"></i> My Bookings</button>
           <button><i class="far fa-calendar-plus"></i> Book a New Room</button>
         </nav>
@@ -28,8 +28,14 @@
     <main>
       <h2 id="containerHeading">My Bookings</h2>
       <section class="customer-bookings">
-      <!-- <section class="article-container"> -->
-
+        <h3>Current Bookings</h3>
+        <section class="booking-container" id="currentBookings">
+          <p>You have no current bookings.</p>
+        </section>
+        <h3>Past Bookings</h3>
+        <section class="booking-container" id="pastBookings">
+          <p>You have no past bookings.</p>
+        </section>
       </section>
       <section class="new-booking"></section>
     </main>
