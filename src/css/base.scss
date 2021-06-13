@@ -264,11 +264,11 @@ h3 {
   }
 
   h2 {
-    font-size: 5vw;
+    font-size: 4vw;
   }
 
   h1 {
-    font-size: 7vw;
+    font-size: 5.5vw;
     display: inline;
   }
 
@@ -293,7 +293,7 @@ h3 {
     justify-content: space-between;
   }
 
-  menu-toggle {
+  .menu-toggle {
     display: none;
   }
 
@@ -304,6 +304,15 @@ h3 {
 
   nav button {
     display: inline;
-    font-size: 2.75vw;
+    font-size: 2.5vw;
+    margin: 0.5vw;
+  }
+
+  .new-booking {
+    padding: 2vw;
+  }
+
+  input {
+    margin: 2vw;
   }
 }
