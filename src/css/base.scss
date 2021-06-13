@@ -41,7 +41,7 @@ h1 {
 
 h2 {
   font-size: 7vw;
-  margin: 1em;
+  margin: 1em 1em 0.5em 1em;
 }
 
 .menu-toggle {
@@ -127,6 +127,21 @@ nav button:hover {
 .booking-img {
   width: 20vw;
   margin-right: 3vw;
+}
+
+.new-booking {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4vw;
+}
+
+input {
+  margin: 3vw 3vw 6vw 3vw;
+}
+
+.availability-container {
+  margin-top: 6vw;
 }
 
 .active {
