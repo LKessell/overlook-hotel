@@ -1,3 +1,5 @@
+@import '_variables';
+
 
 * {
   margin: 0;
@@ -8,12 +10,12 @@
 body {
   font-family: 'Open Sans', sans-serif;
   min-height: 100vh;
-  background-color: #efefef;
+  background-color: $bg-color;
 }
 
 header {
-  background-color: #2b2b2b;
-  color: #ffffff;
+  background-color: $main-color;
+  color: $light-color;
   padding: 2vw 6vw;
   min-height: 19vw;
 }
@@ -50,14 +52,14 @@ nav {
 
 .fa-calendar-day,
 .fa-calendar-plus {
-  color: #24b4fd;
+  color: $accent-color;
   margin: 0.1em;
 }
 
 button {
   border: none;
   background: none;
-  color: #ffffff;
+  color: $light-color;
   font-size: 8vw;
   cursor: pointer;
 }
@@ -73,10 +75,10 @@ nav button {
 }
 
 nav button:hover {
-  color: #24b4fd;
+  color: $accent-color;
 }
 
 .active {
-  color: #ffffff;
+  color: $light-color;
   pointer-events: none;
 }
