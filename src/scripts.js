@@ -98,7 +98,13 @@ const postBooking = (bookingInfo) => {
     body: JSON.stringify(bookingInfo)
   })
     .then(checkForPostError)
-    .then(result => console.log(result.message))
+    .then(setUpRooms)
+    .then(() => {
+      domUpdates.toggle(postModal);
+      domUpdates.switchViews();
+      domUpdates.toggle(navMenu);
+      domUpdates.clearContent(availableRooms);
+    })
     .catch(err => displayErrorMesssage(err));
 }
 
@@ -123,18 +129,20 @@ const displayErrorMesssage = (err) => {
 }
 
 const setUpRooms = () => {
- fetchData('rooms')
-  .then(data => data.rooms.forEach(element => rooms.push(element)))
-  .then(() => setUpBookings())
+  rooms = [];
+  fetchData('rooms')
+    .then(data => data.rooms.forEach(element => rooms.push(element)))
+    .then(() => setUpBookings())
 }
 
 const setUpBookings = () => {
- fetchData('bookings')
-  .then(data => data.bookings.forEach(element => bookings.push(element)))
-  .then(() => {
-    setUpLedger(rooms, bookings);
-    loadUserInfo();
-  })
+  bookings = [];
+  fetchData('bookings')
+    .then(data => data.bookings.forEach(element => bookings.push(element)))
+    .then(() => {
+      setUpLedger(rooms, bookings);
+      loadUserInfo();
+    })
 }
 
 const setUpLedger = (roomData, bookingData) => {
@@ -143,17 +151,17 @@ const setUpLedger = (roomData, bookingData) => {
 
 const loadUserInfo = () => {
   fetchData('customers/1')
-  .then(customerData => customer = new Customer(customerData, ledger.bookings))
-  .then(() => {
-    updateUser();
+    .then(customerData => customer = new Customer(customerData, ledger.bookings))
+    .then(() => {
+      updateUser();
   })
 }
 const updateUser = () => {
   const amount = customer.getTotalSpent(ledger.rooms);
   dropdownName.innerText = customer.name;
   dropdownInfo.innerHTML = `
-  <p>My lifetime room spendings:</p>
-  <p>$${amount.toFixed(2)}</p>
+    <p>My lifetime room spendings:</p>
+    <p>$${amount.toFixed(2)}</p>
   `;
   populateBookings();
 }
