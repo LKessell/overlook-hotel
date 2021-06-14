@@ -25,6 +25,9 @@ const todayDate = '2020-02-01';
 // Query Selectors
 const navMenu = document.getElementById('navMenu');
 const menuToggle = document.getElementById('menuToggle');
+const dropdownButton = document.getElementById('dropdownButton');
+const dropdownName = document.getElementById('dropdownName');
+const dropdownInfo = document.getElementById('dropdownInfo');
 const currentBookings = document.getElementById('currentBookings');
 const pastBookings = document.getElementById('pastBookings');
 
@@ -36,6 +39,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 menuToggle.addEventListener('click', () => {
   domUpdates.toggle(navMenu);
+});
+
+dropdownButton.addEventListener('click', () => {
+  domUpdates.toggle(dropdownInfo);
 })
 
 // Scripts
@@ -77,8 +84,17 @@ const loadUserInfo = () => {
   .then(customerData => customer = new Customer(customerData, ledger.bookings))
   .then(() => {
     console.log(customer);
-    populateBookings();
+    updateUser();
   })
+}
+const updateUser = () => {
+  const amount = customer.getTotalSpent(ledger.rooms);
+  dropdownName.innerText = customer.name;
+  dropdownInfo.innerHTML = `
+  <p>My lifetime room spendings:</p>
+  <p>$${amount.toFixed(2)}</p>
+  `;
+  populateBookings();
 }
 
 const populateBookings = () => {
