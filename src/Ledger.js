@@ -50,6 +50,10 @@ class Ledger {
       return false;
     }
   }
+
+  getRoomByNumber(number) {
+    return this.rooms.find(room => room.number === number);
+  }
 }
 
 export default Ledger;

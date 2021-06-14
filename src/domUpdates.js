@@ -44,24 +44,26 @@ const domUpdates = {
     this.toggle(navMenu)
   },
 
-  changeHeading(text, element) {
+  changeText(text, element) {
     element.innerText = text;
   },
 
   renderRoomCards(container, data) {
     container.innerHTML = '';
+
     if (data.length) {
       data.forEach(element => {
-        let image = element.roomType.split(' ')[0];
+        const image = element.roomType.split(' ')[0];
+
         container.innerHTML += `
         <article>
           <div class="image-wrapper">
             <img src="./images/${image}.jpg" alt="${element.roomType}">
             <div class="image-overlay">
-              <button class="more-info"><i class="fas fa-info-circle"></i></button>
+              <button class="more-info" id="${image + '-' + element.number}"><i class="fas fa-plus-circle"></i></button>
               <div class="overlay-text">
                 <p>Number</p>
-                <p class="counter">${element.number}</p>
+                <p>${element.number}</p>
               </div>
             </div>
           </div>
@@ -71,7 +73,7 @@ const domUpdates = {
             <p class="info-text">Bed Size: ${element.bedSize}</p>
             <p class="info-text">Number of Beds: ${element.numBeds}</p>
             <p class="info-text">Cost Per Night:</p>
-            <p class="counter">$${element.costPerNight.toFixed(2)}</p>
+            <p>$${element.costPerNight.toFixed(2)}</p>
           </section>
         </article>
         `;
@@ -79,7 +81,29 @@ const domUpdates = {
     } else {
       container.innerHTML = '<p>We are very sorry, but no rooms match your current selections.</p><p>Please try a different date or room type.</p>';
     }
-  }
+  },
+
+  renderModalContent(event, ledger) {
+    const id = event.target.closest('button').id.split('-');
+    const type = id[0];
+    const roomNum = parseInt(id[1]);
+    const roomData = ledger.getRoomByNumber(roomNum);
+
+    modalContent.innerHTML = `
+      <img class="modal-image" src="./images/${type}.jpg">
+      <p>Confirm booking:</p>
+      <p>Date: ${datePicker.value}</p>
+      <p>Room Number: ${roomNum}</p>
+      <p>Room Type: ${roomData.roomType}</p>
+      <p>Cost: $${roomData.costPerNight.toFixed(2)}</p>
+      <button class="submit" id="postBooking" value="${roomNum}">Confirm This Booking</button>
+      <p class="error-message" id="errorMsg"></p>
+    `;
+  },
+
+  clearContent(container) {
+    container.innerHTML = '';
+  },
 }
 
 export default domUpdates;

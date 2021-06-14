@@ -39,6 +39,10 @@ const datePicker = document.getElementById('datePicker');
 const typeFilter = document.getElementById('typeFilter');
 const submitSearch = document.getElementById('submitSearch');
 const availableRooms = document.getElementById('availableRooms');
+const postModal = document.getElementById('postModal');
+const closeModal = document.getElementById('closeModal');
+const modalContent = document.getElementById('modalContent');
+const successMsg = document.getElementById('successMsg');
 
 // Event Listeners
 window.addEventListener('DOMContentLoaded', () => {
@@ -56,12 +60,12 @@ dropdownButton.addEventListener('click', () => {
 });
 
 newBookButton.addEventListener('click', () => {
-  domUpdates.changeHeading('Book a New Room', containerHeading);
+  domUpdates.changeText('Book a New Room', containerHeading);
   domUpdates.switchViews();
 });
 
 dashboardButton.addEventListener('click', () => {
-  domUpdates.changeHeading('My Bookings', containerHeading);
+  domUpdates.changeText('My Bookings', containerHeading);
   domUpdates.switchViews();
 });
 
@@ -69,11 +73,39 @@ submitSearch.addEventListener('click', () => {
   getRoomSelections();
 });
 
+availableRooms.addEventListener('click', (event) => {
+  selectRoomToBook(event);
+});
+
+closeModal.addEventListener('click', () => {
+  domUpdates.toggle(postModal);
+});
+
+modalContent.addEventListener('click', (event) => {
+  createBooking(event);
+});
+
+datePicker.addEventListener('click', () => {
+  domUpdates.clearContent(availableRooms);
+});
+
 // Scripts
 const fetchData = (type) => {
   return fetch(`http://localhost:3001/api/v1/${type}`)
     .then(response => checkForGetError(response))
     .catch(err => console.error(err));
+}
+
+const postBooking = (bookingInfo) => {
+  fetch('http://localhost:3001/api/v1/bookings', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(bookingInfo)
+  })
+    .then(checkForPostError)
+    .then(setUpRooms)
+    .then(resetToDashboard)
+    .catch(err => displayErrorMesssage(err));
 }
 
 const checkForGetError = (response) => {
@@ -84,39 +116,52 @@ const checkForGetError = (response) => {
   }
 }
 
- const setUpRooms = () => {
-   fetchData('rooms')
+const checkForPostError = (response) => {
+  if (!response.ok) {
+    throw new Error('Please make sure a valid date is chosen.');
+  } else {
+    return response.json();
+  }
+}
+
+const displayErrorMesssage = (err) => {
+  console.error(err.message);
+}
+
+const setUpRooms = () => {
+  rooms = [];
+  fetchData('rooms')
     .then(data => data.rooms.forEach(element => rooms.push(element)))
     .then(() => setUpBookings())
- }
+}
 
- const setUpBookings = () => {
-   fetchData('bookings')
+const setUpBookings = () => {
+  bookings = [];
+  fetchData('bookings')
     .then(data => data.bookings.forEach(element => bookings.push(element)))
     .then(() => {
       setUpLedger(rooms, bookings);
       loadUserInfo();
     })
- }
+}
 
 const setUpLedger = (roomData, bookingData) => {
   ledger = new Ledger(roomData, bookingData);
 }
 
 const loadUserInfo = () => {
-  fetchData('customers/1')
-  .then(customerData => customer = new Customer(customerData, ledger.bookings))
-  .then(() => {
-    console.log(customer);
-    updateUser();
+  fetchData('customers/2')
+    .then(customerData => customer = new Customer(customerData, ledger.bookings))
+    .then(() => {
+      updateUser();
   })
 }
 const updateUser = () => {
   const amount = customer.getTotalSpent(ledger.rooms);
   dropdownName.innerText = customer.name;
   dropdownInfo.innerHTML = `
-  <p>My lifetime room spendings:</p>
-  <p>$${amount.toFixed(2)}</p>
+    <p>My lifetime room spendings:</p>
+    <p>$${amount.toFixed(2)}</p>
   `;
   populateBookings();
 }
@@ -141,4 +186,28 @@ const getRoomSelections = () => {
   }
 
   domUpdates.renderRoomCards(availableRooms, data)
+}
+
+const selectRoomToBook = (event) => {
+  if (event.target.classList.contains('fas')) {
+    domUpdates.renderModalContent(event, ledger);
+    domUpdates.toggle(postModal);
+  }
+}
+
+const createBooking = (event) => {
+  if (event.target.id === 'postBooking') {
+    const date = datePicker.value.split('-').join('/');
+    const data = { 'userID': customer.id, 'date': date, 'roomNumber': parseInt(event.target.value) };
+    postBooking(data)
+  }
+}
+
+const resetToDashboard = () => {
+  domUpdates.toggle(postModal);
+  domUpdates.switchViews();
+  domUpdates.toggle(navMenu);
+  domUpdates.clearContent(availableRooms);
+  domUpdates.changeText('Your booking was successful!', successMsg);
+  setTimeout(() => domUpdates.clearContent(successMsg), 2000);
 }
