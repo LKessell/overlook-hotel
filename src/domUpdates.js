@@ -50,15 +50,17 @@ const domUpdates = {
 
   renderRoomCards(container, data) {
     container.innerHTML = '';
+
     if (data.length) {
       data.forEach(element => {
-        let image = element.roomType.split(' ')[0];
+        const image = element.roomType.split(' ')[0];
+
         container.innerHTML += `
         <article>
           <div class="image-wrapper">
             <img src="./images/${image}.jpg" alt="${element.roomType}">
             <div class="image-overlay">
-              <button class="more-info" id="${element.number}"><i class="fas fa-info-circle"></i></button>
+              <button class="more-info" id="${image + '-' + element.number}"><i class="fas fa-info-circle"></i></button>
               <div class="overlay-text">
                 <p>Number</p>
                 <p>${element.number}</p>
@@ -79,7 +81,24 @@ const domUpdates = {
     } else {
       container.innerHTML = '<p>We are very sorry, but no rooms match your current selections.</p><p>Please try a different date or room type.</p>';
     }
-  }
+  },
+
+  renderModalContent(event, ledger) {
+    const id = event.target.closest('button').id.split('-');
+    const type = id[0];
+    const roomNum = parseInt(id[1]);
+    const roomData = ledger.getRoomByNumber(roomNum);
+
+    modalContent.innerHTML = `
+      <img class="modal-image" src="./images/${type}.jpg">
+      <p>Confirm booking:</p>
+      <p>Date: ${datePicker.value}</p>
+      <p>Room Number: ${roomNum}</p>
+      <p>Room Type: ${roomData.roomType}</p>
+      <p>Cost: $${roomData.costPerNight.toFixed(2)}</p>
+      <button class="submit" id="postBooking">Confirm This Booking</button>
+    `;
+  },
 }
 
 export default domUpdates;
