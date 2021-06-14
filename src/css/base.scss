@@ -41,7 +41,7 @@ h1 {
 }
 
 h2 {
-  font-size: 7vw;
+  font-size: 6vw;
   margin: 1em 1em 0.5em 1em;
 }
 
@@ -147,7 +147,9 @@ nav button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 4vw;
+  padding: 0 4vw;
+  text-align: center;
+  font-size: 3.5vw;
 }
 
 input {
