@@ -28,11 +28,21 @@ const menuToggle = document.getElementById('menuToggle');
 const dropdownButton = document.getElementById('dropdownButton');
 const dropdownName = document.getElementById('dropdownName');
 const dropdownInfo = document.getElementById('dropdownInfo');
+const dashboardButton = document.getElementById('dashboardButton');
+const newBookButton = document.getElementById('newBookButton');
+const containerHeading = document.getElementById('containerHeading');
+const dashboardView = document.getElementById('dashboardView');
 const currentBookings = document.getElementById('currentBookings');
 const pastBookings = document.getElementById('pastBookings');
+const newBookView = document.getElementById('newBookView');
+const datePicker = document.getElementById('datePicker');
+const typeFilter = document.getElementById('typeFilter');
+const submitSearch = document.getElementById('submitSearch');
+const availableRooms = document.getElementById('availableRooms');
 
 // Event Listeners
 window.addEventListener('DOMContentLoaded', () => {
+  datePicker.value = todayDate;
   domUpdates.hide(navMenu);
   setUpRooms();
 });
@@ -43,7 +53,21 @@ menuToggle.addEventListener('click', () => {
 
 dropdownButton.addEventListener('click', () => {
   domUpdates.toggle(dropdownInfo);
-})
+});
+
+newBookButton.addEventListener('click', () => {
+  domUpdates.changeHeading('Book a New Room', containerHeading);
+  domUpdates.switchViews();
+});
+
+dashboardButton.addEventListener('click', () => {
+  domUpdates.changeHeading('My Bookings', containerHeading);
+  domUpdates.switchViews();
+});
+
+submitSearch.addEventListener('click', () => {
+  getRoomSelections();
+});
 
 // Scripts
 const fetchData = (type) => {
@@ -104,4 +128,17 @@ const populateBookings = () => {
 
   domUpdates.renderBookings(currentBookings, future);
   domUpdates.renderBookings(pastBookings, past);
+}
+
+const getRoomSelections = () => {
+  let data;
+  const dateMatches = ledger.getAvailableRooms(datePicker.value);
+
+  if (typeFilter.value === 'all') {
+    data = dateMatches;
+  } else {
+    data = ledger.filterByType(dateMatches, typeFilter.value);
+  }
+
+  domUpdates.renderRoomCards(availableRooms, data)
 }

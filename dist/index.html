@@ -24,14 +24,14 @@
         <h1>The Overlook</h1>
         <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
         <nav id="navMenu">
-          <button class="active"><i class="fas fa-calendar-day"></i> My Bookings</button>
-          <button><i class="far fa-calendar-plus"></i> Book a New Room</button>
+          <button class="active" id="dashboardButton"><i class="fas fa-calendar-day"></i> My Bookings</button>
+          <button id="newBookButton"><i class="far fa-calendar-plus"></i> Book a New Room</button>
         </nav>
       </div>
     </header>
     <main>
       <h2 id="containerHeading">My Bookings</h2>
-      <section class="customer-bookings">
+      <section class="customer-bookings" id="dashboardView">
         <h3>Current Bookings</h3>
         <section class="booking-container" id="currentBookings">
         </section>
@@ -39,8 +39,8 @@
         <section class="booking-container" id="pastBookings">
         </section>
       </section>
-      <section class="new-booking hidden">
-        <label for="choose-date">Choose a date to view room availability:</label>
+      <section class="new-booking hidden" id="newBookView">
+        <label for="choose-date">Choose a date:</label>
         <input type="date" name="choose-date" id="datePicker">
         <section class="type-filter">
           <label for="typeFilter">Filter rooms by Type:</label>
@@ -52,28 +52,8 @@
             <option value="single room">Single Room</option>
           </select>
         </section>
-        <section class="availability-container">
-          <!-- <p>We are very sorry, but no rooms match your current selections. Please try a different date or room type.</p> -->
-          <article>
-            <div class="image-wrapper">
-              <img src="./images/residential.jpg" alt="residential suite">
-              <div class="image-overlay">
-                <button class="more-info"><i class="fas fa-info-circle"></i></button>
-                <div class="overlay-text">
-                  <p>Number</p>
-                  <p class="counter">1</p>
-                </div>
-              </div>
-            </div>
-            <section class="article-text">
-              <p class="name-text">Residential Suite</p>
-              <p class="info-text">Bidet: Yes</p>
-              <p class="info-text">Bed Size: Queen</p>
-              <p class="info-text">Number of Beds: 1</p>
-              <p class="info-text">Cost Per Night:</p>
-              <p class="counter">$358.40</p>
-            </section>
-          </article>
+        <button class="submit" id="submitSearch">View Rooms</button>
+        <section class="availability-container" id="availableRooms">
         </section>
       </section>
     </main>
