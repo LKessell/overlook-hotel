@@ -1,14 +1,76 @@
 // This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
-
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
-import './images/junior.jpg'
-import './images/residential.jpg'
-import './images/single.jpg'
-import './images/suite.jpg'
+import './images/turing-logo.png';
+import './images/junior.jpg';
+import './images/residential.jpg';
+import './images/single.jpg';
+import './images/suite.jpg';
 
-console.log('This is the JavaScript entry file - your code begins here.');
+import Booking from './Booking';
+import Customer from './Customer';
+import Ledger from './Ledger';
+import Room from './Room';
+
+import domUpdates from './domUpdates';
+
+// Variables
+let customer;
+let ledger;
+let rooms = [];
+let bookings = [];
+
+// Query Selectors
+const navMenu = document.getElementById('navMenu');
+const menuToggle = document.getElementById('menuToggle');
+
+// Event Listeners
+window.addEventListener('DOMContentLoaded', () => {
+  domUpdates.hide(navMenu);
+  setUpRooms();
+});
+
+menuToggle.addEventListener('click', () => {
+  domUpdates.toggle(navMenu);
+})
+
+// Scripts
+const fetchData = (type) => {
+  return fetch(`http://localhost:3001/api/v1/${type}`)
+    .then(response => checkForGetError(response))
+    .catch(err => console.error(err));
+}
+
+const checkForGetError = (response) => {
+  if (!response.ok) {
+    throw new Error('Could not retrieve data, please try again.');
+  } else {
+    return response.json();
+  }
+}
+
+ const setUpRooms = () => {
+   fetchData('rooms')
+    .then(data => data.rooms.forEach(element => rooms.push(element)))
+    .then(() => setUpBookings())
+ }
+
+ const setUpBookings = () => {
+   fetchData('bookings')
+    .then(data => data.bookings.forEach(element => bookings.push(element)))
+    .then(() => {
+      setUpLedger(rooms, bookings);
+      loadUserInfo();
+    })
+ }
+
+const setUpLedger = (roomData, bookingData) => {
+  ledger = new Ledger(roomData, bookingData);
+}
+
+const loadUserInfo = () => {
+  fetchData('customers/1')
+  .then(customerData => customer = new Customer(customerData, ledger.bookings))
+  .then(() => console.log(customer))
+}
