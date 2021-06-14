@@ -42,6 +42,10 @@ const domUpdates = {
     this.toggle(dashboardView);
     this.toggleActive(dashboardButton);
   },
+
+  changeHeading(text, element) {
+    element.innerText = text;
+  },
 }
 
 export default domUpdates;
