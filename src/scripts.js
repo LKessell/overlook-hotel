@@ -91,12 +91,35 @@ const fetchData = (type) => {
     .catch(err => console.error(err));
 }
 
+const postBooking = (bookingInfo) => {
+  fetch('http://localhost:3001/api/v1/bookings', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(bookingInfo)
+  })
+    .then(checkForError)
+    .then((result) => console.log(result.message))
+    .catch((err) => displayErrorMesssage(err));
+}
+
 const checkForGetError = (response) => {
   if (!response.ok) {
     throw new Error('Could not retrieve data, please try again.');
   } else {
     return response.json();
   }
+}
+
+const checkForPostError = (response) => {
+  if (!response.ok) {
+    throw new Error('Please make sure a valid date is chosen.');
+  } else {
+    return response.json();
+  }
+}
+
+const displayErrorMesssage = (err) => {
+  console.error(err.message);
 }
 
 const setUpRooms = () => {
@@ -122,7 +145,6 @@ const loadUserInfo = () => {
   fetchData('customers/1')
   .then(customerData => customer = new Customer(customerData, ledger.bookings))
   .then(() => {
-    // console.log(customer);
     updateUser();
   })
 }
