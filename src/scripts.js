@@ -38,6 +38,7 @@ const newBookView = document.getElementById('newBookView');
 const datePicker = document.getElementById('datePicker');
 const typeFilter = document.getElementById('typeFilter');
 const submitSearch = document.getElementById('submitSearch');
+const availableRooms = document.getElementById('availableRooms');
 
 // Event Listeners
 window.addEventListener('DOMContentLoaded', () => {
@@ -64,9 +65,8 @@ dashboardButton.addEventListener('click', () => {
   domUpdates.switchViews();
 });
 
-submitSearch.addEventListener('click', (event) => {
-  console.log(datePicker.value);
-  console.log(typeFilter.value);
+submitSearch.addEventListener('click', () => {
+  getRoomSelections();
 });
 
 // Scripts
@@ -128,4 +128,17 @@ const populateBookings = () => {
 
   domUpdates.renderBookings(currentBookings, future);
   domUpdates.renderBookings(pastBookings, past);
+}
+
+const getRoomSelections = () => {
+  let data;
+  const dateMatches = ledger.getAvailableRooms(datePicker.value);
+
+  if (typeFilter.value === 'all') {
+    data = dateMatches;
+  } else {
+    data = ledger.filterByType(dateMatches, typeFilter.value);
+  }
+
+  domUpdates.renderRoomCards(availableRooms, data)
 }
