@@ -44,7 +44,7 @@ const domUpdates = {
     this.toggle(navMenu)
   },
 
-  changeHeading(text, element) {
+  changeText(text, element) {
     element.innerText = text;
   },
 
