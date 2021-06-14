@@ -60,7 +60,7 @@ const domUpdates = {
           <div class="image-wrapper">
             <img src="./images/${image}.jpg" alt="${element.roomType}">
             <div class="image-overlay">
-              <button class="more-info" id="${image + '-' + element.number}"><i class="fas fa-info-circle"></i></button>
+              <button class="more-info" id="${image + '-' + element.number}"><i class="fas fa-plus-circle"></i></button>
               <div class="overlay-text">
                 <p>Number</p>
                 <p>${element.number}</p>
@@ -96,7 +96,7 @@ const domUpdates = {
       <p>Room Number: ${roomNum}</p>
       <p>Room Type: ${roomData.roomType}</p>
       <p>Cost: $${roomData.costPerNight.toFixed(2)}</p>
-      <button class="submit" id="postBooking">Confirm This Booking</button>
+      <button class="submit" id="postBooking" value="${roomNum}">Confirm This Booking</button>
     `;
   },
 }
