@@ -39,6 +39,8 @@ const datePicker = document.getElementById('datePicker');
 const typeFilter = document.getElementById('typeFilter');
 const submitSearch = document.getElementById('submitSearch');
 const availableRooms = document.getElementById('availableRooms');
+const postModal = document.getElementById('postModal');
+const closeModal = document.getElementById('closeModal');
 
 // Event Listeners
 window.addEventListener('DOMContentLoaded', () => {
@@ -69,6 +71,10 @@ submitSearch.addEventListener('click', () => {
   getRoomSelections();
 });
 
+availableRooms.addEventListener('click', (event) => {
+  selectRoomToBook(event);
+});
+
 // Scripts
 const fetchData = (type) => {
   return fetch(`http://localhost:3001/api/v1/${type}`)
@@ -84,20 +90,20 @@ const checkForGetError = (response) => {
   }
 }
 
- const setUpRooms = () => {
-   fetchData('rooms')
-    .then(data => data.rooms.forEach(element => rooms.push(element)))
-    .then(() => setUpBookings())
- }
+const setUpRooms = () => {
+ fetchData('rooms')
+  .then(data => data.rooms.forEach(element => rooms.push(element)))
+  .then(() => setUpBookings())
+}
 
- const setUpBookings = () => {
-   fetchData('bookings')
-    .then(data => data.bookings.forEach(element => bookings.push(element)))
-    .then(() => {
-      setUpLedger(rooms, bookings);
-      loadUserInfo();
-    })
- }
+const setUpBookings = () => {
+ fetchData('bookings')
+  .then(data => data.bookings.forEach(element => bookings.push(element)))
+  .then(() => {
+    setUpLedger(rooms, bookings);
+    loadUserInfo();
+  })
+}
 
 const setUpLedger = (roomData, bookingData) => {
   ledger = new Ledger(roomData, bookingData);
@@ -141,4 +147,11 @@ const getRoomSelections = () => {
   }
 
   domUpdates.renderRoomCards(availableRooms, data)
+}
+
+const selectRoomToBook = (event) => {
+  if (event.target.closest('button').classList.contains('more-info')) {
+    console.log(event.target.closest('button').id);
+    domUpdates.toggle(postModal);
+  }
 }
