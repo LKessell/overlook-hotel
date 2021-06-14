@@ -20,10 +20,16 @@ let customer;
 let ledger;
 let rooms = [];
 let bookings = [];
+const todayDate = '2020-02-01';
 
 // Query Selectors
 const navMenu = document.getElementById('navMenu');
 const menuToggle = document.getElementById('menuToggle');
+const dropdownButton = document.getElementById('dropdownButton');
+const dropdownName = document.getElementById('dropdownName');
+const dropdownInfo = document.getElementById('dropdownInfo');
+const currentBookings = document.getElementById('currentBookings');
+const pastBookings = document.getElementById('pastBookings');
 
 // Event Listeners
 window.addEventListener('DOMContentLoaded', () => {
@@ -33,6 +39,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 menuToggle.addEventListener('click', () => {
   domUpdates.toggle(navMenu);
+});
+
+dropdownButton.addEventListener('click', () => {
+  domUpdates.toggle(dropdownInfo);
 })
 
 // Scripts
@@ -72,5 +82,26 @@ const setUpLedger = (roomData, bookingData) => {
 const loadUserInfo = () => {
   fetchData('customers/1')
   .then(customerData => customer = new Customer(customerData, ledger.bookings))
-  .then(() => console.log(customer))
+  .then(() => {
+    console.log(customer);
+    updateUser();
+  })
+}
+const updateUser = () => {
+  const amount = customer.getTotalSpent(ledger.rooms);
+  dropdownName.innerText = customer.name;
+  dropdownInfo.innerHTML = `
+  <p>My lifetime room spendings:</p>
+  <p>$${amount.toFixed(2)}</p>
+  `;
+  populateBookings();
+}
+
+const populateBookings = () => {
+  const sorted = customer.sortBookings();
+  const past = customer.getPastBookings(todayDate);
+  const future = customer.getFutureBookings(todayDate);
+
+  domUpdates.renderBookings(currentBookings, future);
+  domUpdates.renderBookings(pastBookings, past);
 }

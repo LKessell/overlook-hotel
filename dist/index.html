@@ -13,8 +13,12 @@
   <header>
       <section class="user-wrapper">
         <i class="fas fa-user"></i>
-        <p class="username">Cool Username</p>
-        <i class="fas fa-caret-down"></i>
+        <button id="dropdownButton">
+          <span class="username" id="dropdownName">Cool Username</span>
+          <i class="fas fa-caret-down"></i>
+        </button>
+        <article class="dropdown hidden" id="dropdownInfo">
+        </article>
       </section>
       <div class="nav-title-wrapper">
         <h1>The Overlook</h1>
@@ -30,20 +34,9 @@
       <section class="customer-bookings">
         <h3>Current Bookings</h3>
         <section class="booking-container" id="currentBookings">
-          <!-- <p>You have no current bookings.</p> -->
-          <article class="single-booking">
-            <img src="./images/turing-logo.png" class="booking-img">
-            <div>
-              <h4>Date:</h4>
-              <p>2020/01/12</p><br>
-              <h4>Room Number:</h4>
-              <p>15</p>
-            </div>
-          </article>
         </section>
         <h3>Past Bookings</h3>
         <section class="booking-container" id="pastBookings">
-          <p>You have no past bookings.</p>
         </section>
       </section>
       <section class="new-booking hidden">
