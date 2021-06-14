@@ -20,10 +20,13 @@ let customer;
 let ledger;
 let rooms = [];
 let bookings = [];
+const todayDate = '2020-02-01';
 
 // Query Selectors
 const navMenu = document.getElementById('navMenu');
 const menuToggle = document.getElementById('menuToggle');
+const currentBookings = document.getElementById('currentBookings');
+const pastBookings = document.getElementById('pastBookings');
 
 // Event Listeners
 window.addEventListener('DOMContentLoaded', () => {
@@ -72,5 +75,17 @@ const setUpLedger = (roomData, bookingData) => {
 const loadUserInfo = () => {
   fetchData('customers/1')
   .then(customerData => customer = new Customer(customerData, ledger.bookings))
-  .then(() => console.log(customer))
+  .then(() => {
+    console.log(customer);
+    populateBookings();
+  })
+}
+
+const populateBookings = () => {
+  const sorted = customer.sortBookings();
+  const past = customer.getPastBookings(todayDate);
+  const future = customer.getFutureBookings(todayDate);
+
+  domUpdates.renderBookings(currentBookings, future);
+  domUpdates.renderBookings(pastBookings, past);
 }
