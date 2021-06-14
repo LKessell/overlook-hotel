@@ -41,6 +41,7 @@ const submitSearch = document.getElementById('submitSearch');
 const availableRooms = document.getElementById('availableRooms');
 const postModal = document.getElementById('postModal');
 const closeModal = document.getElementById('closeModal');
+const modalContent = document.getElementById('modalContent');
 
 // Event Listeners
 window.addEventListener('DOMContentLoaded', () => {
@@ -113,7 +114,7 @@ const loadUserInfo = () => {
   fetchData('customers/1')
   .then(customerData => customer = new Customer(customerData, ledger.bookings))
   .then(() => {
-    console.log(customer);
+    // console.log(customer);
     updateUser();
   })
 }
@@ -151,7 +152,7 @@ const getRoomSelections = () => {
 
 const selectRoomToBook = (event) => {
   if (event.target.closest('button').classList.contains('more-info')) {
-    console.log(event.target.closest('button').id);
+    domUpdates.renderModalContent(event, ledger);
     domUpdates.toggle(postModal);
   }
 }
