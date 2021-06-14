@@ -58,10 +58,10 @@ const domUpdates = {
           <div class="image-wrapper">
             <img src="./images/${image}.jpg" alt="${element.roomType}">
             <div class="image-overlay">
-              <button class="more-info"><i class="fas fa-info-circle"></i></button>
+              <button class="more-info" id="${element.number}"><i class="fas fa-info-circle"></i></button>
               <div class="overlay-text">
                 <p>Number</p>
-                <p class="counter">${element.number}</p>
+                <p>${element.number}</p>
               </div>
             </div>
           </div>
@@ -71,7 +71,7 @@ const domUpdates = {
             <p class="info-text">Bed Size: ${element.bedSize}</p>
             <p class="info-text">Number of Beds: ${element.numBeds}</p>
             <p class="info-text">Cost Per Night:</p>
-            <p class="counter">$${element.costPerNight.toFixed(2)}</p>
+            <p>$${element.costPerNight.toFixed(2)}</p>
           </section>
         </article>
         `;
