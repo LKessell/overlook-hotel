@@ -76,6 +76,14 @@ availableRooms.addEventListener('click', (event) => {
   selectRoomToBook(event);
 });
 
+closeModal.addEventListener('click', () => {
+  domUpdates.toggle(postModal);
+});
+
+modalContent.addEventListener('click', (event) => {
+  createBooking(event);
+});
+
 // Scripts
 const fetchData = (type) => {
   return fetch(`http://localhost:3001/api/v1/${type}`)
@@ -151,8 +159,16 @@ const getRoomSelections = () => {
 }
 
 const selectRoomToBook = (event) => {
-  if (event.target.closest('button').classList.contains('more-info')) {
+  if (event.target.classList.contains('fas')) {
     domUpdates.renderModalContent(event, ledger);
     domUpdates.toggle(postModal);
+  }
+}
+
+const createBooking = (event) => {
+  if (event.target.id === 'postBooking') {
+    console.log(parseInt(event.target.value))
+    console.log(datePicker.value)
+    console.log(customer.id)
   }
 }
