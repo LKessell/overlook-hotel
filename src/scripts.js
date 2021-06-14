@@ -35,9 +35,13 @@ const dashboardView = document.getElementById('dashboardView');
 const currentBookings = document.getElementById('currentBookings');
 const pastBookings = document.getElementById('pastBookings');
 const newBookView = document.getElementById('newBookView');
+const datePicker = document.getElementById('datePicker');
+const typeFilter = document.getElementById('typeFilter');
+const submitSearch = document.getElementById('submitSearch');
 
 // Event Listeners
 window.addEventListener('DOMContentLoaded', () => {
+  datePicker.value = todayDate;
   domUpdates.hide(navMenu);
   setUpRooms();
 });
@@ -58,6 +62,11 @@ newBookButton.addEventListener('click', () => {
 dashboardButton.addEventListener('click', () => {
   domUpdates.changeHeading('My Bookings', containerHeading);
   domUpdates.switchViews();
+});
+
+submitSearch.addEventListener('click', (event) => {
+  console.log(datePicker.value);
+  console.log(typeFilter.value);
 });
 
 // Scripts
