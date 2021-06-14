@@ -97,9 +97,9 @@ const postBooking = (bookingInfo) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(bookingInfo)
   })
-    .then(checkForError)
-    .then((result) => console.log(result.message))
-    .catch((err) => displayErrorMesssage(err));
+    .then(checkForPostError)
+    .then(result => console.log(result.message))
+    .catch(err => displayErrorMesssage(err));
 }
 
 const checkForGetError = (response) => {
@@ -189,8 +189,8 @@ const selectRoomToBook = (event) => {
 
 const createBooking = (event) => {
   if (event.target.id === 'postBooking') {
-    console.log(parseInt(event.target.value))
-    console.log(datePicker.value)
-    console.log(customer.id)
+    const date = datePicker.value.split('-').join('/');
+    const data = { 'userID': customer.id, 'date': date, 'roomNumber': parseInt(event.target.value) };
+    postBooking(data)
   }
 }
