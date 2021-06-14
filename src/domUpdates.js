@@ -97,7 +97,12 @@ const domUpdates = {
       <p>Room Type: ${roomData.roomType}</p>
       <p>Cost: $${roomData.costPerNight.toFixed(2)}</p>
       <button class="submit" id="postBooking" value="${roomNum}">Confirm This Booking</button>
+      <p class="error-message" id="errorMsg"></p>
     `;
+  },
+
+  clearContent(container) {
+    container.innerHTML = '';
   },
 }
 
