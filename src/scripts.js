@@ -42,6 +42,7 @@ const availableRooms = document.getElementById('availableRooms');
 const postModal = document.getElementById('postModal');
 const closeModal = document.getElementById('closeModal');
 const modalContent = document.getElementById('modalContent');
+const successMsg = document.getElementById('successMsg');
 
 // Event Listeners
 window.addEventListener('DOMContentLoaded', () => {
@@ -59,12 +60,12 @@ dropdownButton.addEventListener('click', () => {
 });
 
 newBookButton.addEventListener('click', () => {
-  domUpdates.changeHeading('Book a New Room', containerHeading);
+  domUpdates.changeText('Book a New Room', containerHeading);
   domUpdates.switchViews();
 });
 
 dashboardButton.addEventListener('click', () => {
-  domUpdates.changeHeading('My Bookings', containerHeading);
+  domUpdates.changeText('My Bookings', containerHeading);
   domUpdates.switchViews();
 });
 
@@ -84,6 +85,10 @@ modalContent.addEventListener('click', (event) => {
   createBooking(event);
 });
 
+datePicker.addEventListener('click', () => {
+  domUpdates.clearContent(availableRooms);
+});
+
 // Scripts
 const fetchData = (type) => {
   return fetch(`http://localhost:3001/api/v1/${type}`)
@@ -99,12 +104,7 @@ const postBooking = (bookingInfo) => {
   })
     .then(checkForPostError)
     .then(setUpRooms)
-    .then(() => {
-      domUpdates.toggle(postModal);
-      domUpdates.switchViews();
-      domUpdates.toggle(navMenu);
-      domUpdates.clearContent(availableRooms);
-    })
+    .then(resetToDashboard)
     .catch(err => displayErrorMesssage(err));
 }
 
@@ -150,7 +150,7 @@ const setUpLedger = (roomData, bookingData) => {
 }
 
 const loadUserInfo = () => {
-  fetchData('customers/1')
+  fetchData('customers/2')
     .then(customerData => customer = new Customer(customerData, ledger.bookings))
     .then(() => {
       updateUser();
@@ -201,4 +201,13 @@ const createBooking = (event) => {
     const data = { 'userID': customer.id, 'date': date, 'roomNumber': parseInt(event.target.value) };
     postBooking(data)
   }
+}
+
+const resetToDashboard = () => {
+  domUpdates.toggle(postModal);
+  domUpdates.switchViews();
+  domUpdates.toggle(navMenu);
+  domUpdates.clearContent(availableRooms);
+  domUpdates.changeText('Your booking was successful!', successMsg);
+  setTimeout(() => domUpdates.clearContent(successMsg), 2000);
 }
