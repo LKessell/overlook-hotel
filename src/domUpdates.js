@@ -31,6 +31,11 @@ const domUpdates = {
       container.innerHTML = 'No bookings to display';
     }
   },
+
+  switchViews() {
+    this.toggle(newBookView);
+    this.toggle(dashboardView);
+  },
 }
 
 export default domUpdates;
