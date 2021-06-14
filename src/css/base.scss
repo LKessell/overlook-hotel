@@ -270,6 +270,14 @@ h3 {
   font-weight: 600;
 }
 
+.error-message {
+  color: $accent-color;
+}
+
+.success-msg {
+  color: green;
+}
+
 .active {
   color: $light-color;
   pointer-events: none;
