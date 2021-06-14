@@ -14,6 +14,14 @@ describe('Ledger Class', () => {
     ledger = new Ledger(roomsTestData, bookingsTestData);
   });
 
+  it('Should be a function', () => {
+    expect(Ledger).to.be.a('function');
+  });
+
+  it('Should be an instance of the Ledger class', () => {
+    expect(ledger).to.be.an.instanceof(Ledger);
+  });
+
   it('Should hold an array of all Room instances', () => {
     expect(ledger.rooms[0]).to.be.an.instanceof(Room);
     expect(ledger.rooms).to.deep.equal([
@@ -201,5 +209,16 @@ describe('Ledger Class', () => {
   it('Should return false if no matches are found', () => {
     const availableRooms = ledger.getAvailableRooms('2020-01-11');
     expect(ledger.filterByType(availableRooms, 'junior suite')).to.equal(false);
+  });
+
+  it('Should return a room\'s data when given the number', () => {
+    expect(ledger.getRoomByNumber(4)).to.deep.equal({
+      'number': 4,
+      'roomType': 'single room',
+      'bidet': false,
+      'bedSize': 'queen',
+      'numBeds': 1,
+      'costPerNight': 429.44
+    });
   });
 });
