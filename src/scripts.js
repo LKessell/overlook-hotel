@@ -53,6 +53,10 @@ newBookButton.addEventListener('click', () => {
   domUpdates.switchViews();
 });
 
+dashboardButton.addEventListener('click', () => {
+  domUpdates.switchViews();
+});
+
 // Scripts
 const fetchData = (type) => {
   return fetch(`http://localhost:3001/api/v1/${type}`)
