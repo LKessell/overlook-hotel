@@ -10,6 +10,27 @@ const domUpdates = {
   toggle(element) {
     element.classList.toggle('hidden');
   },
+
+  renderBookings(container, data) {
+    container.innerHTML = '';
+    if (data.length) {
+      data.forEach(element => {
+        container.innerHTML += `
+        <article class="single-booking">
+        <i class="fas fa-calendar-day list-icon"></i>
+        <div>
+        <h4>Date:</h4>
+        <p>${element.date}</p><br>
+        <h4>Room Number:</h4>
+        <p>${element.roomNumber}</p>
+        </div>
+        </article>
+        `
+      })
+    } else {
+      container.innerHTML = 'No bookings to display';
+    }
+  },
 }
 
 export default domUpdates;
