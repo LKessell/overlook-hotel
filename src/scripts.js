@@ -52,7 +52,7 @@ const checkForGetError = (response) => {
     .then(data => data.bookings.forEach(element => bookings.push(element)))
     .then(() => {
       setUpLedger(rooms, bookings);
-      console.log(ledger)
+      loadUserInfo();
     })
  }
 
@@ -60,7 +60,8 @@ const setUpLedger = (roomData, bookingData) => {
   ledger = new Ledger(roomData, bookingData);
 }
 
-// const loadUserInfo = () => {
-//   fetchData('customers/1')
-//   .then(customerData => customer = new Customer(customerData));
-// }
+const loadUserInfo = () => {
+  fetchData('customers/1')
+  .then(customerData => customer = new Customer(customerData, ledger.bookings))
+  .then(() => console.log(customer))
+}
