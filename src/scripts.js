@@ -13,6 +13,8 @@ import Customer from './Customer';
 import Ledger from './Ledger';
 import Room from './Room';
 
+import domUpdates from './domUpdates';
+
 // Variables
 let customer;
 let ledger;
@@ -20,11 +22,18 @@ let rooms = [];
 let bookings = [];
 
 // Query Selectors
+const navMenu = document.getElementById('navMenu');
+const menuToggle = document.getElementById('menuToggle');
 
 // Event Listeners
 window.addEventListener('DOMContentLoaded', () => {
+  domUpdates.hide(navMenu);
   setUpRooms();
 });
+
+menuToggle.addEventListener('click', () => {
+  domUpdates.toggle(navMenu);
+})
 
 // Scripts
 const fetchData = (type) => {
