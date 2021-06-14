@@ -27,6 +27,7 @@ main {
 .user-wrapper {
   display: flex;
   justify-content: flex-end;
+  align-items: first baseline;
   margin-bottom: 4vw;
 }
 
@@ -98,6 +99,19 @@ nav button:hover {
 
 .username:hover ~ .fa-caret-down {
   transform: translateY(2px);
+}
+
+.dropdown {
+  width: 45vw;
+  height: 23vw;
+  padding: 1.5vw;
+  border: 1px solid #dc6457;
+  background-color: $main-color;
+  position: absolute;
+  top: 15vw;
+  z-index: 1;
+  text-align: center;
+  font-size: 4vw;
 }
 
 .customer-bookings {
