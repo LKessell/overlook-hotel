@@ -30,6 +30,7 @@ const dropdownName = document.getElementById('dropdownName');
 const dropdownInfo = document.getElementById('dropdownInfo');
 const dashboardButton = document.getElementById('dashboardButton');
 const newBookButton = document.getElementById('newBookButton');
+const containerHeading = document.getElementById('containerHeading');
 const dashboardView = document.getElementById('dashboardView');
 const currentBookings = document.getElementById('currentBookings');
 const pastBookings = document.getElementById('pastBookings');
@@ -50,10 +51,12 @@ dropdownButton.addEventListener('click', () => {
 });
 
 newBookButton.addEventListener('click', () => {
+  domUpdates.changeHeading('Book a New Room', containerHeading);
   domUpdates.switchViews();
 });
 
 dashboardButton.addEventListener('click', () => {
+  domUpdates.changeHeading('My Bookings', containerHeading);
   domUpdates.switchViews();
 });
 
