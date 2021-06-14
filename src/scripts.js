@@ -28,8 +28,12 @@ const menuToggle = document.getElementById('menuToggle');
 const dropdownButton = document.getElementById('dropdownButton');
 const dropdownName = document.getElementById('dropdownName');
 const dropdownInfo = document.getElementById('dropdownInfo');
+const dashboardButton = document.getElementById('dashboardButton');
+const newBookButton = document.getElementById('newBookButton');
+const dashboardView = document.getElementById('dashboardView');
 const currentBookings = document.getElementById('currentBookings');
 const pastBookings = document.getElementById('pastBookings');
+const newBookView = document.getElementById('newBookView');
 
 // Event Listeners
 window.addEventListener('DOMContentLoaded', () => {
@@ -43,7 +47,11 @@ menuToggle.addEventListener('click', () => {
 
 dropdownButton.addEventListener('click', () => {
   domUpdates.toggle(dropdownInfo);
-})
+});
+
+newBookButton.addEventListener('click', () => {
+  domUpdates.switchViews();
+});
 
 // Scripts
 const fetchData = (type) => {
