@@ -41,6 +41,7 @@ const domUpdates = {
     this.toggleActive(newBookButton);
     this.toggle(dashboardView);
     this.toggleActive(dashboardButton);
+    this.toggle(navMenu)
   },
 
   changeHeading(text, element) {
