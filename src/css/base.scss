@@ -154,6 +154,15 @@ input {
   margin: 3vw 3vw 6vw 3vw;
 }
 
+.submit {
+  font-size: 3vw;
+  background-color: $main-color;
+  border: 1px solid $accent-color;
+  border-radius: 1vw;
+  padding: 2vw;
+  margin: 3vw;
+}
+
 .availability-container {
   display: flex;
   flex-direction: column;
