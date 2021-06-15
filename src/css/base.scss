@@ -139,6 +139,7 @@ nav button:hover {
   margin: 2vw;
   padding: 2vw;
   display: flex;
+  align-items: center;
   font-size: 3.5vw;
 
   h4, p {
@@ -454,8 +455,22 @@ h3 {
     font-size: 1.5vw;
   }
 
-  h2 {
-    font-size: 2.5vw;
+  h2,
+  h3 {
+    font-size: 2vw;
+  }
+
+  .single-booking {
+    width: 20vw;
+    font-size: 1.2vw;
+    height: 10vw;
+    padding: 1vw;
+    margin: 1vw;
+  }
+
+  .list-icon {
+    font-size: 4vw;
+    margin-right: 2vw;
   }
 
   .new-booking {
