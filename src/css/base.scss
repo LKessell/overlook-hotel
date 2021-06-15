@@ -70,7 +70,7 @@ button {
   cursor: pointer;
 }
 
-nav button {
+.nav-button {
   display: block;
   text-decoration: none;
   text-transform: uppercase;
@@ -78,6 +78,14 @@ nav button {
   color: #969696;
   margin: 5vw 1vw;
   transition: color 0.3s;
+}
+
+.nav-list {
+  display: none;
+}
+
+.nav-list.open {
+  display: block;
 }
 
 nav button:hover {
@@ -168,6 +176,7 @@ input {
 .availability-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   margin-top: 6vw;
 
   article {
@@ -364,6 +373,10 @@ h3 {
   nav {
     display: inline;
     width: auto;
+  }
+
+  .nav-list {
+    display: inline;
   }
 
   nav button {
