@@ -56,7 +56,7 @@ const domUpdates = {
           <div class="image-wrapper">
             <img src="./images/${image}.jpg" alt="${element.roomType}">
             <div class="image-overlay">
-              <button class="more-info" id="${image + '-' + element.number}"><i class="fas fa-plus-circle"></i></button>
+              <button class="more-info" title="select room" id="${image + '-' + element.number}"><i class="fas fa-plus-circle"></i></button>
               <div class="overlay-text">
                 <p>Number</p>
                 <p>${element.number}</p>
