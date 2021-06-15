@@ -22,7 +22,7 @@
       </section>
       <div class="nav-title-wrapper">
         <h1>The Overlook</h1>
-        <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+        <button class="menu-toggle" title="menu toggle button" id="menuToggle"><i class="fas fa-bars"></i></button>
         <nav class="nav-list" id="navMenu">
           <button class="nav-button active" id="dashboardButton" disabled><i class="fas fa-calendar-day"></i> My Bookings</button>
           <button class="nav-button" id="newBookButton"><i class="far fa-calendar-plus"></i> Book a New Room</button>
@@ -43,7 +43,7 @@
       <section class="new-booking hidden" id="newBookView">
         <form class="booking-form">
           <div>
-            <label for="choose-date">Choose a date:</label>
+            <label for="datePicker">Choose a date:</label>
             <input type="date" name="choose-date" id="datePicker">
           </div>
           <section class="type-filter">
@@ -69,7 +69,6 @@
         </section>
       </section>
     </section>
-  <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   <script src="bundle.js"></script>
 </body>
 </html>
