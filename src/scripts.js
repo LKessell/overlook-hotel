@@ -172,16 +172,20 @@ const setUpRooms = () => {
 
 const setUpBookings = () => {
   bookings = [];
+
   fetchData('bookings')
     .then(data => data.bookings.forEach(element => bookings.push(element)))
     .then(() => {
       setUpLedger(rooms, bookings);
-      // loadUserInfo();
     })
 }
 
 const setUpLedger = (roomData, bookingData) => {
   ledger = new Ledger(roomData, bookingData);
+
+  if (customer) {
+    loadUserInfo(customer.id);
+  }
 }
 
 const loadUserInfo = (number) => {
@@ -191,6 +195,7 @@ const loadUserInfo = (number) => {
       updateUser();
   })
 }
+
 const updateUser = () => {
   const amount = customer.getTotalSpent(ledger.rooms);
   dropdownName.innerText = customer.name;
