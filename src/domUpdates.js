@@ -7,12 +7,8 @@ const domUpdates = {
     element.classList.add('hidden');
   },
 
-  toggle(element) {
-    element.classList.toggle('hidden');
-  },
-
-  toggleActive(element) {
-    element.classList.toggle('active');
+  toggle(element, property) {
+    element.classList.toggle(property);
   },
 
   renderBookings(container, data) {
@@ -37,11 +33,11 @@ const domUpdates = {
   },
 
   switchViews() {
-    this.toggle(newBookView);
-    this.toggleActive(newBookButton);
-    this.toggle(dashboardView);
-    this.toggleActive(dashboardButton);
-    this.toggle(navMenu)
+    this.toggle(newBookView, 'hidden');
+    this.toggle(newBookButton, 'active');
+    this.toggle(dashboardView, 'hidden');
+    this.toggle(dashboardButton, 'active');
+    this.toggle(navMenu, 'open');
   },
 
   changeText(text, element) {
