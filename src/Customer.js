@@ -56,11 +56,12 @@ class Customer {
 
   getTotalSpent(roomData) {
     const roomNums = this.bookings.map(booking => booking.roomNumber);
-  
-    return roomData.reduce((sum, room) => {
-      if (roomNums.includes(room.number)) {
-        sum += room.costPerNight;
-      }
+
+    return roomNums.reduce((sum, roomNum) => {
+      const match = roomData.find(room => room.number === roomNum);
+
+      sum += match.costPerNight;
+
       return sum;
     }, 0);
   }
