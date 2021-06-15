@@ -25,8 +25,8 @@ Users can log in with the following username and password combination:
 - fetch API to retrieve data
 
 ## <a id="#contributors">Contributors</a>
-[Lauren Kessell](https://github.com/LKessell)
-[Kat White](https://github.com/k-atwhite); Code reviewer
+[Lauren Kessell](https://github.com/LKessell)  
+[Kat White](https://github.com/k-atwhite); Code review
 
 ## <a id="#challenges-and-wins">Challenges and Wins</a>
 Using fetch to retrieve data from the API was very challenging! There were a lot of moving pieces in this project, and making sure that all of the data was retrieved successfully before trying to update the DOM was tricky, especially when implementing the login and refreshing after a new booking was created.  
