@@ -145,16 +145,18 @@ const displayErrorMesssage = (err) => {
 
 const validateLogin = () => {
   const username = loginForm.username.value;
-  const password = loginForm.password.value;
+  const password = loginForm.password.value === 'overlook2021';
   const number = username.split('r')[1];
+  const nameString = username.split('r')[0] === 'custome';
 
-  if (number >= 1 && number <= 50) {
+  if (number >= 1 && number <= 50 && nameString && password) {
     console.log('success');
+    domUpdates.hide(loginErrorMsg);
   } else {
     domUpdates.show(loginErrorMsg);
   }
 
-  // console.log(username.split('r')[1])
+  // console.log(username.split('r')[0])
 }
 
 const setUpRooms = () => {
