@@ -430,6 +430,24 @@ h3 {
     padding: 1.5vw;
     margin: 0 40vw;
   }
+
+  .modal-container {
+    left: 20vw;
+    width: 60vw;
+    padding: 3vw;
+
+    img {
+      width: 40vw;
+    }
+
+    .submit {
+      margin: 2vw 14vw;
+    }
+  }
+
+  .close-modal {
+    font-size: 5vw;
+  }
 }
 
 @media screen and (min-width: 900px) {
