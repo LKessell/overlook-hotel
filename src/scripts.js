@@ -47,6 +47,7 @@ const loginOverlay = document.getElementById('loginOverlay');
 const loginForm = document.getElementById('loginForm');
 const loginErrorMsg = document.getElementById('loginErrorMsg');
 const loginFormSubmit = document.getElementById('loginFormSubmit');
+const dateError = document.getElementById('dateError');
 
 // Event Listeners
 window.addEventListener('DOMContentLoaded', () => {
@@ -86,7 +87,7 @@ dashboardButton.addEventListener('click', () => {
 
 submitSearch.addEventListener('click', (event) => {
   event.preventDefault();
-  getRoomSelections();
+  checkDateInput();
 });
 
 availableRooms.addEventListener('click', (event) => {
@@ -213,6 +214,19 @@ const populateBookings = () => {
 
   domUpdates.renderBookings(currentBookings, future);
   domUpdates.renderBookings(pastBookings, past);
+}
+
+const checkDateInput = () => {
+  const input = new Date(datePicker.value);
+  const today = new Date(todayDate);
+
+  if (input < today) {
+    const message = `Please choose a date no earlier than ${todayDate}`;
+    domUpdates.changeText(message, dateError);
+  } else {
+    domUpdates.changeText('', dateError);
+    getRoomSelections();
+  }
 }
 
 const getRoomSelections = () => {
