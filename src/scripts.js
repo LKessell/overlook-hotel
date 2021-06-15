@@ -74,7 +74,8 @@ dashboardButton.addEventListener('click', () => {
   domUpdates.switchViews();
 });
 
-submitSearch.addEventListener('click', () => {
+submitSearch.addEventListener('click', (event) => {
+  event.preventDefault();
   getRoomSelections();
 });
 
@@ -199,6 +200,7 @@ const selectRoomToBook = (event) => {
   if (clickSelect || tabSelect) {
     domUpdates.renderModalContent(event, ledger);
     domUpdates.toggle(postModal, 'hidden');
+    closeModal.focus();
   }
 }
 
