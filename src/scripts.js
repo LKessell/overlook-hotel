@@ -43,6 +43,7 @@ const postModal = document.getElementById('postModal');
 const closeModal = document.getElementById('closeModal');
 const modalContent = document.getElementById('modalContent');
 const successMsg = document.getElementById('successMsg');
+const loginOverlay = document.getElementById('loginOverlay');
 const loginForm = document.getElementById('loginForm');
 const loginErrorMsg = document.getElementById('loginErrorMsg');
 const loginFormSubmit = document.getElementById('loginFormSubmit');
@@ -150,14 +151,16 @@ const validateLogin = () => {
   const nameString = username.split('r')[0] === 'custome';
 
   if (number >= 1 && number <= 50 && nameString && password) {
-    console.log('success');
-    domUpdates.hide(loginErrorMsg);
-    loadUserInfo(number);
+    loadDashboard(number);
   } else {
     domUpdates.show(loginErrorMsg);
   }
+}
 
-  console.log(typeof number)
+const loadDashboard = (number) => {
+  domUpdates.toggle(loginOverlay, 'hidden');
+  domUpdates.hide(loginErrorMsg);
+  loadUserInfo(number);
 }
 
 const setUpRooms = () => {
