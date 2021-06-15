@@ -47,16 +47,15 @@ const successMsg = document.getElementById('successMsg');
 // Event Listeners
 window.addEventListener('DOMContentLoaded', () => {
   datePicker.value = todayDate;
-  domUpdates.hide(navMenu);
   setUpRooms();
 });
 
 menuToggle.addEventListener('click', () => {
-  domUpdates.toggle(navMenu);
+  domUpdates.toggle(navMenu, 'open');
 });
 
 dropdownButton.addEventListener('click', () => {
-  domUpdates.toggle(dropdownInfo);
+  domUpdates.toggle(dropdownInfo, 'hidden');
 });
 
 newBookButton.addEventListener('click', () => {
@@ -78,7 +77,7 @@ availableRooms.addEventListener('click', (event) => {
 });
 
 closeModal.addEventListener('click', () => {
-  domUpdates.toggle(postModal);
+  domUpdates.toggle(postModal, 'hidden');
 });
 
 modalContent.addEventListener('click', (event) => {
@@ -191,7 +190,7 @@ const getRoomSelections = () => {
 const selectRoomToBook = (event) => {
   if (event.target.classList.contains('fas')) {
     domUpdates.renderModalContent(event, ledger);
-    domUpdates.toggle(postModal);
+    domUpdates.toggle(postModal, 'hidden');
   }
 }
 
@@ -204,10 +203,11 @@ const createBooking = (event) => {
 }
 
 const resetToDashboard = () => {
-  domUpdates.toggle(postModal);
+  domUpdates.toggle(postModal, 'hidden');
   domUpdates.switchViews();
-  domUpdates.toggle(navMenu);
+  domUpdates.toggle(navMenu, 'open');
   domUpdates.clearContent(availableRooms);
   domUpdates.changeText('Your booking was successful!', successMsg);
+  scroll(0,0);
   setTimeout(() => domUpdates.clearContent(successMsg), 2000);
 }
