@@ -47,6 +47,8 @@ const successMsg = document.getElementById('successMsg');
 // Event Listeners
 window.addEventListener('DOMContentLoaded', () => {
   datePicker.value = todayDate;
+  newBookButton.disabled = false;
+  dashboardButton.disabled = true;
   setUpRooms();
 });
 
@@ -60,11 +62,15 @@ dropdownButton.addEventListener('click', () => {
 
 newBookButton.addEventListener('click', () => {
   domUpdates.changeText('Book a New Room', containerHeading);
+  newBookButton.disabled = true;
+  dashboardButton.disabled = false;
   domUpdates.switchViews();
 });
 
 dashboardButton.addEventListener('click', () => {
   domUpdates.changeText('My Bookings', containerHeading);
+  newBookButton.disabled = false;
+  dashboardButton.disabled = true;
   domUpdates.switchViews();
 });
 
@@ -188,7 +194,9 @@ const getRoomSelections = () => {
 }
 
 const selectRoomToBook = (event) => {
-  if (event.target.classList.contains('fas')) {
+  const clickSelect = event.target.classList.contains('fas');
+  const tabSelect = event.target.classList.contains('more-info');
+  if (clickSelect || tabSelect) {
     domUpdates.renderModalContent(event, ledger);
     domUpdates.toggle(postModal, 'hidden');
   }
@@ -203,6 +211,8 @@ const createBooking = (event) => {
 }
 
 const resetToDashboard = () => {
+  newBookButton.disabled = false;
+  dashboardButton.disabled = true;
   domUpdates.toggle(postModal, 'hidden');
   domUpdates.changeText('My Bookings', containerHeading);
   domUpdates.switchViews();
