@@ -146,17 +146,18 @@ const displayErrorMesssage = (err) => {
 const validateLogin = () => {
   const username = loginForm.username.value;
   const password = loginForm.password.value === 'overlook2021';
-  const number = username.split('r')[1];
+  const number = parseInt(username.split('r')[1]);
   const nameString = username.split('r')[0] === 'custome';
 
   if (number >= 1 && number <= 50 && nameString && password) {
     console.log('success');
     domUpdates.hide(loginErrorMsg);
+    loadUserInfo(number);
   } else {
     domUpdates.show(loginErrorMsg);
   }
 
-  // console.log(username.split('r')[0])
+  console.log(typeof number)
 }
 
 const setUpRooms = () => {
@@ -172,7 +173,7 @@ const setUpBookings = () => {
     .then(data => data.bookings.forEach(element => bookings.push(element)))
     .then(() => {
       setUpLedger(rooms, bookings);
-      loadUserInfo();
+      // loadUserInfo();
     })
 }
 
@@ -180,8 +181,8 @@ const setUpLedger = (roomData, bookingData) => {
   ledger = new Ledger(roomData, bookingData);
 }
 
-const loadUserInfo = () => {
-  fetchData('customers/2')
+const loadUserInfo = (number) => {
+  fetchData(`customers/${number}`)
     .then(customerData => customer = new Customer(customerData, ledger.bookings))
     .then(() => {
       updateUser();
