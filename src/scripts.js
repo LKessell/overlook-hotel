@@ -47,6 +47,7 @@ const successMsg = document.getElementById('successMsg');
 // Event Listeners
 window.addEventListener('DOMContentLoaded', () => {
   datePicker.value = todayDate;
+  datePicker.setAttribute('min', todayDate);
   newBookButton.disabled = false;
   dashboardButton.disabled = true;
   setUpRooms();
