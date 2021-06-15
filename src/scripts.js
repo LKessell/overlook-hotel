@@ -110,7 +110,7 @@ datePicker.addEventListener('click', () => {
 const fetchData = (type) => {
   return fetch(`http://localhost:3001/api/v1/${type}`)
     .then(response => checkForGetError(response))
-    .catch(err => console.error(err));
+    .catch(err => displayErrorMesssage(err, 'get'));
 }
 
 const postBooking = (bookingInfo) => {
@@ -122,12 +122,12 @@ const postBooking = (bookingInfo) => {
     .then(checkForPostError)
     .then(setUpRooms)
     .then(resetToDashboard)
-    .catch(err => displayErrorMesssage(err));
+    .catch(err => displayErrorMesssage(err, 'post'));
 }
 
 const checkForGetError = (response) => {
   if (!response.ok) {
-    throw new Error('Could not retrieve data, please try again.');
+    throw new Error('Could not retrieve data.');
   } else {
     return response.json();
   }
@@ -135,13 +135,22 @@ const checkForGetError = (response) => {
 
 const checkForPostError = (response) => {
   if (!response.ok) {
-    throw new Error('Please make sure a valid date is chosen.');
+    throw new Error('Invalid date is chosen.');
   } else {
     return response.json();
   }
 }
 
-const displayErrorMesssage = (err) => {
+const displayErrorMesssage = (err, type) => {
+  if (type = 'get') {
+    const message = 'We could not retrieve your data at this time, please try again later.'
+    domUpdates.changeText(message, currentBookings);
+    domUpdates.changeText(message, pastBookings);
+  } else {
+    const container = document.getElementById('errorMsg');
+    const message = 'We are unable to process your booking at this time. Please try again later.'
+    domUpdates.changeText(message, container);
+  }
   console.error(err.message);
 }
 
@@ -256,7 +265,7 @@ const createBooking = (event) => {
   if (event.target.id === 'postBooking') {
     const date = datePicker.value.split('-').join('/');
     const data = { 'userID': customer.id, 'date': date, 'roomNumber': parseInt(event.target.value) };
-    postBooking(data)
+    postBooking(data);
   }
 }
 
