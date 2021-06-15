@@ -298,6 +298,18 @@ h3 {
 
 @media screen and (min-width: 600px) {
 
+  .booking-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  .single-booking {
+    width: 40vw;
+    font-size: 2.5vw;
+  }
+
   .availability-container {
     flex-direction: row;
     flex-wrap: wrap;
@@ -347,7 +359,6 @@ h3 {
 
   .user-wrapper * {
     font-size: 2vw;
-    margin-bottom: 4vw;
   }
 
   .nav-title-wrapper {
@@ -379,7 +390,7 @@ h3 {
     display: inline;
   }
 
-  nav button {
+  .nav-button {
     display: inline;
     font-size: 2.5vw;
     margin: 0.5vw;
