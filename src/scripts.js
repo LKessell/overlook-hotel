@@ -43,6 +43,9 @@ const postModal = document.getElementById('postModal');
 const closeModal = document.getElementById('closeModal');
 const modalContent = document.getElementById('modalContent');
 const successMsg = document.getElementById('successMsg');
+const loginForm = document.getElementById('loginForm');
+const loginErrorMsg = document.getElementById('loginErrorMsg');
+const loginFormSubmit = document.getElementById('loginFormSubmit');
 
 // Event Listeners
 window.addEventListener('DOMContentLoaded', () => {
@@ -51,6 +54,11 @@ window.addEventListener('DOMContentLoaded', () => {
   newBookButton.disabled = false;
   dashboardButton.disabled = true;
   setUpRooms();
+});
+
+loginFormSubmit.addEventListener('click', (event) => {
+  event.preventDefault();
+  validateLogin();
 });
 
 menuToggle.addEventListener('click', () => {
@@ -133,6 +141,20 @@ const checkForPostError = (response) => {
 
 const displayErrorMesssage = (err) => {
   console.error(err.message);
+}
+
+const validateLogin = () => {
+  const username = loginForm.username.value;
+  const password = loginForm.password.value;
+  const number = username.split('r')[1];
+
+  if (number >= 1 && number <= 50) {
+    console.log('success');
+  } else {
+    domUpdates.show(loginErrorMsg);
+  }
+
+  // console.log(username.split('r')[1])
 }
 
 const setUpRooms = () => {
