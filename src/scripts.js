@@ -43,6 +43,10 @@ const postModal = document.getElementById('postModal');
 const closeModal = document.getElementById('closeModal');
 const modalContent = document.getElementById('modalContent');
 const successMsg = document.getElementById('successMsg');
+const loginOverlay = document.getElementById('loginOverlay');
+const loginForm = document.getElementById('loginForm');
+const loginErrorMsg = document.getElementById('loginErrorMsg');
+const loginFormSubmit = document.getElementById('loginFormSubmit');
 
 // Event Listeners
 window.addEventListener('DOMContentLoaded', () => {
@@ -51,6 +55,11 @@ window.addEventListener('DOMContentLoaded', () => {
   newBookButton.disabled = false;
   dashboardButton.disabled = true;
   setUpRooms();
+});
+
+loginFormSubmit.addEventListener('click', (event) => {
+  event.preventDefault();
+  validateLogin();
 });
 
 menuToggle.addEventListener('click', () => {
@@ -135,6 +144,25 @@ const displayErrorMesssage = (err) => {
   console.error(err.message);
 }
 
+const validateLogin = () => {
+  const username = loginForm.username.value;
+  const password = loginForm.password.value === 'overlook2021';
+  const number = parseInt(username.split('r')[1]);
+  const nameString = username.split('r')[0] === 'custome';
+
+  if (number >= 1 && number <= 50 && nameString && password) {
+    loadDashboard(number);
+  } else {
+    domUpdates.show(loginErrorMsg);
+  }
+}
+
+const loadDashboard = (number) => {
+  domUpdates.toggle(loginOverlay, 'hidden');
+  domUpdates.hide(loginErrorMsg);
+  loadUserInfo(number);
+}
+
 const setUpRooms = () => {
   rooms = [];
   fetchData('rooms')
@@ -144,25 +172,30 @@ const setUpRooms = () => {
 
 const setUpBookings = () => {
   bookings = [];
+
   fetchData('bookings')
     .then(data => data.bookings.forEach(element => bookings.push(element)))
     .then(() => {
       setUpLedger(rooms, bookings);
-      loadUserInfo();
     })
 }
 
 const setUpLedger = (roomData, bookingData) => {
   ledger = new Ledger(roomData, bookingData);
+
+  if (customer) {
+    loadUserInfo(customer.id);
+  }
 }
 
-const loadUserInfo = () => {
-  fetchData('customers/2')
+const loadUserInfo = (number) => {
+  fetchData(`customers/${number}`)
     .then(customerData => customer = new Customer(customerData, ledger.bookings))
     .then(() => {
       updateUser();
   })
 }
+
 const updateUser = () => {
   const amount = customer.getTotalSpent(ledger.rooms);
   dropdownName.innerText = customer.name;
