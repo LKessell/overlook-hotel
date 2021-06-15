@@ -161,7 +161,7 @@ nav button:hover {
 }
 
 input {
-  margin: 3vw 3vw 6vw 3vw;
+  margin: 3.5vw;
 }
 
 .submit {
@@ -298,6 +298,12 @@ h3 {
 
 @media screen and (min-width: 600px) {
 
+  .booking-form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
   .booking-container {
     display: flex;
     flex-wrap: wrap;
@@ -408,13 +414,85 @@ h3 {
     font-size: 2vw;
   }
 
-  input {
+  input,
+  select {
     margin: 2vw;
+  }
+
+  .type-filter {
+    display: flex;
+    align-items: center;
   }
 
   .submit {
     font-size: 2vw;
     padding: 1.5vw;
-    margin: 2vw;
+    margin: 0 40vw;
+  }
+}
+
+@media screen and (min-width: 900px) {
+
+  header {
+    min-height: 14vw;
+    padding: 1em 2em 2em 2em;
+  }
+
+  h1 {
+    font-size: 3.5vw;
+  }
+
+  .user-wrapper * {
+    font-size: 1.2vw;
+  }
+
+  .user-wrapper {
+    margin-bottom: 2em;
+  }
+
+  .nav-button {
+    font-size: 1.5vw;
+  }
+
+  h2 {
+    font-size: 2.5vw;
+  }
+
+  .new-booking {
+    font-size: 1.5vw;
+  }
+
+  .submit {
+    font-size: 1.5vw;
+    padding: 1vw;
+    margin: 0vw 40vw;
+  }
+
+  .availability-container article {
+    height: 25vw;
+    width: 20vw;
+  }
+
+  .image-wrapper {
+    height: 11vw;
+  }
+
+  .more-info {
+    font-size: 3vw;
+  }
+
+  .image-overlay {
+    height: 11vw;
+    padding: 1.5vw;
+  }
+
+  .name-text {
+    font-size: 1.5vw;
+    margin: 0;
+  }
+
+  .info-text {
+    font-size: 1vw;
+    margin-bottom: 0.5em;
   }
 }
