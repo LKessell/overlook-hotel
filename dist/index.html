@@ -10,6 +10,23 @@
   <script src="https://kit.fontawesome.com/10ffbe374d.js" crossorigin="anonymous"></script>
 </head>
 <body>
+  <div class="login-bg">
+    <section class="login-container">
+      <h2>Login</h2>
+      <p class="error-message" id="loginErrorMsg">Invalid username and/or password</p>
+      <form id="loginForm">
+        <div>
+          <label for="usernameField">Username</label>
+          <input type="text" name="username" id="usernameField" class="login-form-field" placeholder="Username">
+        </div>
+        <div>
+          <label for="passwordField">Password</label>
+          <input type="password" name="password" id="passwordField" class="login-form-field" placeholder="Password">
+        </div>
+        <input type="submit" value="Login" id="loginFormSubmit">
+      </form>
+    </section>
+  </div>
   <header>
       <section class="user-wrapper">
         <i class="fas fa-user"></i>
