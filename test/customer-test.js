@@ -5,8 +5,6 @@ import customersTestData from './test-data/customers-data';
 import bookingsTestData from './test-data/bookings-data';
 import roomsTestData from './test-data/rooms-data';
 
-import Booking from '../src/Booking';
-import Room from '../src/Room';
 import Ledger from '../src/Ledger';
 import Customer from '../src/Customer';
 
