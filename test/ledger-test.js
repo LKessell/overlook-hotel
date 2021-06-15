@@ -36,7 +36,7 @@ describe('Ledger Class', () => {
       {
         'number': 2,
         'roomType': 'suite',
-        'bidet': false ,
+        'bidet': false,
         'bedSize': 'full',
         'numBeds': 2,
         'costPerNight': 477.38
@@ -130,7 +130,7 @@ describe('Ledger Class', () => {
       {
         'id': '5fwrgu4i7k55hl6tc',
         'userID': 3,
-        'date':'2020/01/30',
+        'date': '2020/01/30',
         'roomNumber': 4,
         'roomServiceCharges': []
       }
@@ -150,7 +150,7 @@ describe('Ledger Class', () => {
       {
         'number': 2,
         'roomType': 'suite',
-        'bidet': false ,
+        'bidet': false,
         'bedSize': 'full',
         'numBeds': 2,
         'costPerNight': 477.38
@@ -198,7 +198,7 @@ describe('Ledger Class', () => {
       {
         'number': 2,
         'roomType': 'suite',
-        'bidet': false ,
+        'bidet': false,
         'bedSize': 'full',
         'numBeds': 2,
         'costPerNight': 477.38

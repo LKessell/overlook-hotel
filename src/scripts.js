@@ -8,10 +8,8 @@ import './images/residential.jpg';
 import './images/single.jpg';
 import './images/suite.jpg';
 
-import Booking from './Booking';
 import Customer from './Customer';
 import Ledger from './Ledger';
-import Room from './Room';
 
 import domUpdates from './domUpdates';
 
@@ -47,6 +45,7 @@ const loginOverlay = document.getElementById('loginOverlay');
 const loginForm = document.getElementById('loginForm');
 const loginErrorMsg = document.getElementById('loginErrorMsg');
 const loginFormSubmit = document.getElementById('loginFormSubmit');
+const dateError = document.getElementById('dateError');
 
 // Event Listeners
 window.addEventListener('DOMContentLoaded', () => {
@@ -86,7 +85,7 @@ dashboardButton.addEventListener('click', () => {
 
 submitSearch.addEventListener('click', (event) => {
   event.preventDefault();
-  getRoomSelections();
+  checkDateInput();
 });
 
 availableRooms.addEventListener('click', (event) => {
@@ -109,7 +108,7 @@ datePicker.addEventListener('click', () => {
 const fetchData = (type) => {
   return fetch(`http://localhost:3001/api/v1/${type}`)
     .then(response => checkForGetError(response))
-    .catch(err => console.error(err));
+    .catch(err => displayErrorMesssage(err, 'get'));
 }
 
 const postBooking = (bookingInfo) => {
@@ -121,12 +120,12 @@ const postBooking = (bookingInfo) => {
     .then(checkForPostError)
     .then(setUpRooms)
     .then(resetToDashboard)
-    .catch(err => displayErrorMesssage(err));
+    .catch(err => displayErrorMesssage(err, 'post'));
 }
 
 const checkForGetError = (response) => {
   if (!response.ok) {
-    throw new Error('Could not retrieve data, please try again.');
+    throw new Error('Could not retrieve data.');
   } else {
     return response.json();
   }
@@ -134,13 +133,22 @@ const checkForGetError = (response) => {
 
 const checkForPostError = (response) => {
   if (!response.ok) {
-    throw new Error('Please make sure a valid date is chosen.');
+    throw new Error('Invalid date is chosen.');
   } else {
     return response.json();
   }
 }
 
-const displayErrorMesssage = (err) => {
+const displayErrorMesssage = (err, type) => {
+  if (type === 'get') {
+    const message = 'We could not retrieve your data at this time, please try again later.'
+    domUpdates.changeText(message, currentBookings);
+    domUpdates.changeText(message, pastBookings);
+  } else {
+    const container = document.getElementById('errorMsg');
+    const message = 'We are unable to process your booking at this time. Please try again later.'
+    domUpdates.changeText(message, container);
+  }
   console.error(err.message);
 }
 
@@ -193,7 +201,7 @@ const loadUserInfo = (number) => {
     .then(customerData => customer = new Customer(customerData, ledger.bookings))
     .then(() => {
       updateUser();
-  })
+    })
 }
 
 const updateUser = () => {
@@ -207,12 +215,25 @@ const updateUser = () => {
 }
 
 const populateBookings = () => {
-  const sorted = customer.sortBookings();
+  customer.sortBookings();
   const past = customer.getPastBookings(todayDate);
   const future = customer.getFutureBookings(todayDate);
 
   domUpdates.renderBookings(currentBookings, future);
   domUpdates.renderBookings(pastBookings, past);
+}
+
+const checkDateInput = () => {
+  const input = new Date(datePicker.value);
+  const today = new Date(todayDate);
+
+  if (input < today) {
+    const message = `Please choose a date no earlier than ${todayDate}`;
+    domUpdates.changeText(message, dateError);
+  } else {
+    domUpdates.changeText('', dateError);
+    getRoomSelections();
+  }
 }
 
 const getRoomSelections = () => {
@@ -241,8 +262,12 @@ const selectRoomToBook = (event) => {
 const createBooking = (event) => {
   if (event.target.id === 'postBooking') {
     const date = datePicker.value.split('-').join('/');
-    const data = { 'userID': customer.id, 'date': date, 'roomNumber': parseInt(event.target.value) };
-    postBooking(data)
+    const data = {
+      'userID': customer.id,
+      'date': date,
+      'roomNumber': parseInt(event.target.value)
+    };
+    postBooking(data);
   }
 }
 
@@ -255,6 +280,6 @@ const resetToDashboard = () => {
   domUpdates.toggle(navMenu, 'open');
   domUpdates.clearContent(availableRooms);
   domUpdates.changeText('Your booking was successful!', successMsg);
-  scroll(0,0);
+  scroll(0, 0);
   setTimeout(() => domUpdates.clearContent(successMsg), 2000);
 }
