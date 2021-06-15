@@ -204,6 +204,7 @@ const createBooking = (event) => {
 
 const resetToDashboard = () => {
   domUpdates.toggle(postModal, 'hidden');
+  domUpdates.changeText('My Bookings', containerHeading);
   domUpdates.switchViews();
   domUpdates.toggle(navMenu, 'open');
   domUpdates.clearContent(availableRooms);
