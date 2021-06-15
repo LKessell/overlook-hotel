@@ -32,10 +32,7 @@ main {
   @include positionOverlay();
   @include flexColumnCentered();
   @include baseModalStyling();
-
-  .error-message {
-    display: none;
-  }
+  text-align: center;
 }
 
 header {
@@ -276,15 +273,6 @@ h3 {
   @include baseModalStyling();
   text-align: center;
   z-index: 1;
-  // position: fixed;
-  // left: 15vw;
-  // top: 10vw;
-  // background-color: $light-color;
-  // width: 70vw;
-  // height: auto;
-  // border-radius: 10px;
-  // border: 3px solid $accent-color;
-  // padding: 5vw;
 
   img {
     border-radius: 10px;
