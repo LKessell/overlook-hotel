@@ -1,4 +1,5 @@
 @import '_variables';
+@import '_mixins';
 
 
 * {
@@ -13,15 +14,15 @@ body {
   background-color: $bg-color;
 }
 
+main {
+  color: $main-text-color;
+}
+
 header {
   background-color: $main-color;
   color: $light-color;
   padding: 2vw 6vw;
   min-height: 27vw;
-}
-
-main {
-  color: #4c4c4c;
 }
 
 .user-wrapper {
@@ -70,18 +71,25 @@ button {
   cursor: pointer;
 }
 
-nav button {
+.nav-button {
   display: block;
-  text-decoration: none;
   text-transform: uppercase;
   font-size: 5vw;
   color: #969696;
   margin: 5vw 1vw;
-  transition: color 0.3s;
+  transition: $color-fade;
+
+  &:hover {
+    color: $accent-color;
+  }
 }
 
-nav button:hover {
-  color: $accent-color;
+.nav-list {
+  display: none;
+}
+
+.nav-list.open {
+  display: block;
 }
 
 .fa-user {
@@ -94,7 +102,6 @@ nav button:hover {
   font-size: 3vw;
   color: $accent-color;
   margin: 0.2em;
-  cursor: pointer;
 }
 
 .username:hover ~ .fa-caret-down {
@@ -107,17 +114,14 @@ nav button:hover {
   padding: 1.5vw;
   border: 1px solid #dc6457;
   background-color: $main-color;
-  position: absolute;
+  @include positionOverlay();
   top: 15vw;
-  z-index: 1;
   text-align: center;
   font-size: 4vw;
 }
 
 .customer-bookings {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include flexColumnCentered();
 }
 
 .booking-container {
@@ -131,6 +135,7 @@ nav button:hover {
   margin: 2vw;
   padding: 2vw;
   display: flex;
+  align-items: center;
   font-size: 3.5vw;
 
   h4, p {
@@ -144,16 +149,19 @@ nav button:hover {
 }
 
 .new-booking {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include flexColumnCentered();
   padding: 0 4vw;
   text-align: center;
   font-size: 3.5vw;
 }
 
 input {
-  margin: 3vw 3vw 6vw 3vw;
+  margin: 3.5vw;
+  cursor: pointer;
+}
+
+select {
+  cursor: pointer;
 }
 
 .submit {
@@ -163,11 +171,15 @@ input {
   border-radius: 1vw;
   padding: 2vw;
   margin: 3vw;
+  transition: $color-fade;
+
+  &:hover {
+    color: $accent-color;
+  }
 }
 
 .availability-container {
-  display: flex;
-  flex-direction: column;
+  @include flexColumnCentered();
   margin-top: 6vw;
 
   article {
@@ -191,10 +203,9 @@ img {
 }
 
 .image-overlay {
-  position: absolute;
+  @include positionOverlay();
   left: 0;
   top: 0;
-  z-index: 1;
   width: 100%;
   height: 46vw;
   padding: 5vw;
@@ -211,6 +222,7 @@ img {
 .more-info {
   font-size: 12vw;
   align-self: start;
+  @include growOnHover();
 }
 
 .overlay-text {
@@ -228,21 +240,19 @@ h3 {
 }
 
 .name-text {
+  color: $main-color;
   font-weight: 500;
   font-size: 5vw;
   margin: 3vw;
 }
 
 .info-text {
-  color: #a5a5a6;
   font-size: 3.5vw;
   margin-bottom: 2vw;
 }
 
 .modal-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include flexColumnCentered();
   text-align: center;
   z-index: 1;
   position: fixed;
@@ -261,13 +271,12 @@ h3 {
 }
 
 .close-modal {
-  background: none;
-  border: none;
   color: $main-color;
   margin-bottom: 3vw;
   align-self: flex-end;
   font-size: 6vw;
   font-weight: 600;
+  @include growOnHover();
 }
 
 .error-message {
@@ -289,10 +298,27 @@ h3 {
 
 @media screen and (min-width: 600px) {
 
-  .availability-container {
-    flex-direction: row;
+  .booking-form {
+    display: flex;
+    justify-content: center;
     flex-wrap: wrap;
+  }
+
+  .booking-container {
+    display: flex;
+    justify-content: space-evenly;
+    @include flexRowWrap();
+  }
+
+  .single-booking {
+    width: 40vw;
+    font-size: 2.5vw;
+  }
+
+  .availability-container {
+    @include flexRowWrap();
     padding: 0 1em 1em 1em;
+    margin-top: 2vw;
 
     article {
       height: 50vw;
@@ -311,7 +337,7 @@ h3 {
   }
 
   .more-info {
-    font-size: 8vw;
+    font-size: 6vw;
   }
 
   .name-text {
@@ -328,7 +354,7 @@ h3 {
   }
 
   h2 {
-    font-size: 4vw;
+    font-size: 3.5vw;
   }
 
   h1 {
@@ -338,7 +364,6 @@ h3 {
 
   .user-wrapper * {
     font-size: 2vw;
-    margin-bottom: 4vw;
   }
 
   .nav-title-wrapper {
@@ -366,17 +391,160 @@ h3 {
     width: auto;
   }
 
-  nav button {
+  .nav-list {
+    display: inline;
+  }
+
+  .nav-button {
     display: inline;
     font-size: 2.5vw;
     margin: 0.5vw;
   }
 
-  .new-booking {
-    padding: 2vw;
+  .dropdown {
+    width: 38vw;
+    height: 10vw;
+    top: 7vw;
   }
 
-  input {
+  .new-booking {
+    padding: 0 2vw;
+    font-size: 2vw;
+  }
+
+  input,
+  select {
     margin: 2vw;
+  }
+
+  .type-filter {
+    display: flex;
+    align-items: center;
+  }
+
+  .submit {
+    font-size: 2vw;
+    padding: 1.5vw;
+    margin: 0 40vw;
+  }
+
+  .modal-container {
+    left: 20vw;
+    width: 60vw;
+    padding: 3vw;
+
+    img {
+      width: 40vw;
+    }
+
+    .submit {
+      margin: 2vw 14vw;
+    }
+  }
+
+  .close-modal {
+    font-size: 5vw;
+  }
+}
+
+@media screen and (min-width: 900px) {
+
+  header {
+    min-height: 14vw;
+    padding: 1em 2em 2em 2em;
+  }
+
+  h1 {
+    font-size: 3.5vw;
+  }
+
+  .user-wrapper * {
+    font-size: 1.2vw;
+  }
+
+  .user-wrapper {
+    margin-bottom: 2em;
+  }
+
+  .nav-button {
+    font-size: 1.5vw;
+  }
+
+  h2,
+  h3 {
+    font-size: 2vw;
+  }
+
+  .single-booking {
+    width: 20vw;
+    font-size: 1.2vw;
+    height: 10vw;
+    padding: 1vw;
+    margin: 1vw;
+  }
+
+  .list-icon {
+    font-size: 4vw;
+    margin-right: 2vw;
+  }
+
+  .new-booking {
+    font-size: 1.5vw;
+  }
+
+  .submit {
+    font-size: 1.5vw;
+    padding: 1vw;
+    margin: 0vw 40vw;
+  }
+
+  .availability-container article {
+    height: 25vw;
+    width: 20vw;
+  }
+
+  .image-wrapper {
+    height: 11vw;
+  }
+
+  .more-info {
+    font-size: 3vw;
+  }
+
+  .image-overlay {
+    height: 11vw;
+    padding: 1.5vw;
+  }
+
+  .name-text {
+    font-size: 1.5vw;
+    margin: 0;
+  }
+
+  .info-text {
+    font-size: 1vw;
+    margin-bottom: 0.5em;
+  }
+
+  .modal-container {
+    left: 26vw;
+    top: 6vw;
+    width: 48vw;
+    padding: 2vw;
+    font-size: 1.2vw;
+
+    img {
+      width: 26vw;
+    }
+
+    .submit {
+    font-size: 1.2vw;
+    }
+  }
+
+  .close-modal {
+    margin-bottom: 0vw;
+    margin-right: 1vw;
+    font-size: 4vw;
   }
 }

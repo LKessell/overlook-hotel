@@ -47,29 +47,36 @@ const successMsg = document.getElementById('successMsg');
 // Event Listeners
 window.addEventListener('DOMContentLoaded', () => {
   datePicker.value = todayDate;
-  domUpdates.hide(navMenu);
+  datePicker.setAttribute('min', todayDate);
+  newBookButton.disabled = false;
+  dashboardButton.disabled = true;
   setUpRooms();
 });
 
 menuToggle.addEventListener('click', () => {
-  domUpdates.toggle(navMenu);
+  domUpdates.toggle(navMenu, 'open');
 });
 
 dropdownButton.addEventListener('click', () => {
-  domUpdates.toggle(dropdownInfo);
+  domUpdates.toggle(dropdownInfo, 'hidden');
 });
 
 newBookButton.addEventListener('click', () => {
   domUpdates.changeText('Book a New Room', containerHeading);
+  newBookButton.disabled = true;
+  dashboardButton.disabled = false;
   domUpdates.switchViews();
 });
 
 dashboardButton.addEventListener('click', () => {
   domUpdates.changeText('My Bookings', containerHeading);
+  newBookButton.disabled = false;
+  dashboardButton.disabled = true;
   domUpdates.switchViews();
 });
 
-submitSearch.addEventListener('click', () => {
+submitSearch.addEventListener('click', (event) => {
+  event.preventDefault();
   getRoomSelections();
 });
 
@@ -78,7 +85,7 @@ availableRooms.addEventListener('click', (event) => {
 });
 
 closeModal.addEventListener('click', () => {
-  domUpdates.toggle(postModal);
+  domUpdates.toggle(postModal, 'hidden');
 });
 
 modalContent.addEventListener('click', (event) => {
@@ -189,9 +196,12 @@ const getRoomSelections = () => {
 }
 
 const selectRoomToBook = (event) => {
-  if (event.target.classList.contains('fas')) {
+  const clickSelect = event.target.classList.contains('fas');
+  const tabSelect = event.target.classList.contains('more-info');
+  if (clickSelect || tabSelect) {
     domUpdates.renderModalContent(event, ledger);
-    domUpdates.toggle(postModal);
+    domUpdates.toggle(postModal, 'hidden');
+    closeModal.focus();
   }
 }
 
@@ -204,10 +214,14 @@ const createBooking = (event) => {
 }
 
 const resetToDashboard = () => {
-  domUpdates.toggle(postModal);
+  newBookButton.disabled = false;
+  dashboardButton.disabled = true;
+  domUpdates.toggle(postModal, 'hidden');
+  domUpdates.changeText('My Bookings', containerHeading);
   domUpdates.switchViews();
-  domUpdates.toggle(navMenu);
+  domUpdates.toggle(navMenu, 'open');
   domUpdates.clearContent(availableRooms);
   domUpdates.changeText('Your booking was successful!', successMsg);
+  scroll(0,0);
   setTimeout(() => domUpdates.clearContent(successMsg), 2000);
 }
