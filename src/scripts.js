@@ -8,10 +8,8 @@ import './images/residential.jpg';
 import './images/single.jpg';
 import './images/suite.jpg';
 
-import Booking from './Booking';
 import Customer from './Customer';
 import Ledger from './Ledger';
-import Room from './Room';
 
 import domUpdates from './domUpdates';
 
@@ -142,7 +140,7 @@ const checkForPostError = (response) => {
 }
 
 const displayErrorMesssage = (err, type) => {
-  if (type = 'get') {
+  if (type === 'get') {
     const message = 'We could not retrieve your data at this time, please try again later.'
     domUpdates.changeText(message, currentBookings);
     domUpdates.changeText(message, pastBookings);
@@ -203,7 +201,7 @@ const loadUserInfo = (number) => {
     .then(customerData => customer = new Customer(customerData, ledger.bookings))
     .then(() => {
       updateUser();
-  })
+    })
 }
 
 const updateUser = () => {
@@ -217,7 +215,7 @@ const updateUser = () => {
 }
 
 const populateBookings = () => {
-  const sorted = customer.sortBookings();
+  customer.sortBookings();
   const past = customer.getPastBookings(todayDate);
   const future = customer.getFutureBookings(todayDate);
 
@@ -264,7 +262,11 @@ const selectRoomToBook = (event) => {
 const createBooking = (event) => {
   if (event.target.id === 'postBooking') {
     const date = datePicker.value.split('-').join('/');
-    const data = { 'userID': customer.id, 'date': date, 'roomNumber': parseInt(event.target.value) };
+    const data = {
+      'userID': customer.id,
+      'date': date,
+      'roomNumber': parseInt(event.target.value)
+    };
     postBooking(data);
   }
 }
@@ -278,6 +280,6 @@ const resetToDashboard = () => {
   domUpdates.toggle(navMenu, 'open');
   domUpdates.clearContent(availableRooms);
   domUpdates.changeText('Your booking was successful!', successMsg);
-  scroll(0,0);
+  scroll(0, 0);
   setTimeout(() => domUpdates.clearContent(successMsg), 2000);
 }
