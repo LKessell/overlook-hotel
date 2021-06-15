@@ -314,6 +314,7 @@ h3 {
     flex-direction: row;
     flex-wrap: wrap;
     padding: 0 1em 1em 1em;
+    margin-top: 2vw;
 
     article {
       height: 50vw;
@@ -332,7 +333,7 @@ h3 {
   }
 
   .more-info {
-    font-size: 8vw;
+    font-size: 6vw;
   }
 
   .name-text {
@@ -349,7 +350,7 @@ h3 {
   }
 
   h2 {
-    font-size: 4vw;
+    font-size: 3.5vw;
   }
 
   h1 {
@@ -396,11 +397,24 @@ h3 {
     margin: 0.5vw;
   }
 
+  .dropdown {
+    width: 38vw;
+    height: 10vw;
+    top: 7vw;
+  }
+
   .new-booking {
-    padding: 2vw;
+    padding: 0 2vw;
+    font-size: 2vw;
   }
 
   input {
+    margin: 2vw;
+  }
+
+  .submit {
+    font-size: 2vw;
+    padding: 1.5vw;
     margin: 2vw;
   }
 }
