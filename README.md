@@ -1,4 +1,6 @@
-# 🏨 Overlook Hotel 🏨
+<h1 align="center"> 🏨 Overlook Hotel 🏨 </h1>
+
+<p align="center"><img src="https://user-images.githubusercontent.com/77205456/122142499-9db21800-ce1d-11eb-8eed-831f1764c2de.gif"></p>
 
 ## Table of Contents
   - <a href="#overview">Overview</a>
@@ -10,6 +12,7 @@
 
 ## <a id="#overview">Overview</a>
 This is a one-week project completed as the final solo challenge in Module 2 of the Turing School of Software and Design Front-End program. This project centered around building a hotel-like room booking app. The app allows users to log in and see past and upcoming bookings, track the amount they have spent on rooms, as well as create new bookings for the future. This project focused heavily on the asynchronous nature of the fetch API, and displaying the API data in the DOM. 
+<p align="center"><img src="https://user-images.githubusercontent.com/77205456/122142579-c9350280-ce1d-11eb-9a4a-9ffcc46ed121.jpg" width="600"></p>
 
 ## <a id="#setup-instructions">Setup Instructions</a>
 Users can log in with the following username and password combination:
