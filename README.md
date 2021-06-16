@@ -15,6 +15,21 @@ This is a one-week project completed as the final solo challenge in Module 2 of 
 <p align="center"><img src="https://user-images.githubusercontent.com/77205456/122142579-c9350280-ce1d-11eb-9a4a-9ffcc46ed121.jpg" width="600"></p>
 
 ## <a id="#setup-instructions">Setup Instructions</a>
+### Set up the API
+Open a Terminal window and run the following commands:  
+`git clone git@github.com:turingschool-examples/overlook-api.git`  
+`cd overlook-api`  
+`npm install`  
+`npm start`  
+### Set up the App
+Open a new Terminal window and run the following commands:  
+`git clone git@github.com:LKessell/overlook-hotel.git`  
+`cd overlook-hotel`  
+`npm install`  
+`npm start`  
+### In the Browser
+In your web browser, visit `http://localhost:8080/` to use the app!  
+
 Users can log in with the following username and password combination:
 - Username: customer# (with # being a number between 1 and 50)
 - Password: overlook2021 (for all users)
