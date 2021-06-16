@@ -44,12 +44,29 @@ const domUpdates = {
     element.innerText = text;
   },
 
+  capitalizeWords(string) {
+    const words = string.split(' ');
+
+    return words.map(word => word[0].toUpperCase() + word.substring(1)).join(' ');
+  },
+
+  getBidetValue(boolean) {
+    if (boolean) {
+      return 'Yes';
+    } else {
+      return 'No';
+    }
+  },
+
   renderRoomCards(container, data) {
     container.innerHTML = '';
 
     if (data.length) {
       data.forEach(element => {
         const image = element.roomType.split(' ')[0];
+        const capType = this.capitalizeWords(element.roomType);
+        const capBed = this.capitalizeWords(element.bedSize);
+        const bidetVal = this.getBidetValue(element.bidet);
 
         container.innerHTML += `
         <article>
@@ -64,9 +81,9 @@ const domUpdates = {
             </div>
           </div>
           <section class="article-text">
-            <p class="name-text">${element.roomType}</p>
-            <p class="info-text">Bidet: ${element.bidet}</p>
-            <p class="info-text">Bed Size: ${element.bedSize}</p>
+            <p class="name-text">${capType}</p>
+            <p class="info-text">Bidet: ${bidetVal}</p>
+            <p class="info-text">Bed Size: ${capBed}</p>
             <p class="info-text">Number of Beds: ${element.numBeds}</p>
             <p class="info-text">Cost Per Night:</p>
             <p>$${element.costPerNight.toFixed(2)}</p>
@@ -84,13 +101,14 @@ const domUpdates = {
     const type = id[0];
     const roomNum = parseInt(id[1]);
     const roomData = ledger.getRoomByNumber(roomNum);
+    const capType = this.capitalizeWords(roomData.roomType);
 
     modalContent.innerHTML = `
       <img class="modal-image" src="./images/${type}.jpg">
-      <p>Confirm booking:</p>
+      <p>Confirm Your Booking Details:</p>
       <p>Date: ${datePicker.value}</p>
       <p>Room Number: ${roomNum}</p>
-      <p>Room Type: ${roomData.roomType}</p>
+      <p>Room Type: ${capType}</p>
       <p>Cost: $${roomData.costPerNight.toFixed(2)}</p>
       <button class="submit" id="postBooking" value="${roomNum}">Confirm This Booking</button>
       <p class="error-message" id="errorMsg"></p>
