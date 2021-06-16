@@ -50,6 +50,14 @@ const domUpdates = {
     return words.map(word => word[0].toUpperCase() + word.substring(1)).join(' ');
   },
 
+  getBidetValue(boolean) {
+    if (boolean) {
+      return 'Yes';
+    } else {
+      return 'No';
+    }
+  },
+
   renderRoomCards(container, data) {
     container.innerHTML = '';
 
@@ -58,6 +66,7 @@ const domUpdates = {
         const image = element.roomType.split(' ')[0];
         const capType = this.capitalizeWords(element.roomType);
         const capBed = this.capitalizeWords(element.bedSize);
+        const bidetVal = this.getBidetValue(element.bidet);
 
         container.innerHTML += `
         <article>
@@ -73,7 +82,7 @@ const domUpdates = {
           </div>
           <section class="article-text">
             <p class="name-text">${capType}</p>
-            <p class="info-text">Bidet: ${element.bidet}</p>
+            <p class="info-text">Bidet: ${bidetVal}</p>
             <p class="info-text">Bed Size: ${capBed}</p>
             <p class="info-text">Number of Beds: ${element.numBeds}</p>
             <p class="info-text">Cost Per Night:</p>
